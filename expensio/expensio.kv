@@ -1,6 +1,3 @@
-
-
-
 <WelcomeScreen>:
     BoxLayout:
         orientation: "vertical"
@@ -121,7 +118,7 @@
                             rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
                             width: 1.5
                     on_release:
-                        print("Sign Up button pressed") 
+                        root.go_to_sign_up() 
                 Button:
                     text: "Log In"
                     background_color: 0,0,0,0
@@ -139,3 +136,367 @@
                             pos: self.pos
                             size: self.size
                             radius: [15]
+                    on_release:
+                        root.go_to_login()
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+        padding: 0
+
+        # Top section (white)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.35
+            spacing: 20
+            padding: [0, 50, 0, 0]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint_y: None
+                height: 100
+                allow_stretch: True
+
+            Label:
+                text: "[b][color=#073443]Log In[/color][/b]"
+                markup: True
+                font_size: 24
+                color: 0, 0, 0, 1
+                halign: "center"
+                valign: "middle"
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+
+        # Bottom section (blue)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.65
+            padding: [30, 40, 30, 30]
+            spacing: 20
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#07344E")
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [40, 40, 0, 0]
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 20
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    TextInput:
+                        id: login_username
+                        hint_text: "Username"
+                        multiline: False
+                        size_hint: 1, 1
+                        padding: [15, 15]
+                        background_color: 0, 0, 0, 0
+                        foreground_color: 0, 0, 0, 1
+                        hint_text_color: 0.4, 0.4, 0.4, 1
+                        background_normal: ""
+                        background_active: ""
+                        write_tab: False
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    TextInput:
+                        id: login_password
+                        hint_text: "Password"
+                        multiline: False
+                        password: True
+                        size_hint: 1, 1
+                        padding: [15, 15]
+                        background_color: 0, 0, 0, 0
+                        foreground_color: 0, 0, 0, 1
+                        hint_text_color: 0.5, 0.5, 0.5, 1
+                        background_normal: ""
+                        background_active: ""
+                        write_tab: False
+
+                Widget:
+                    size_hint_y: None
+                    height: 10
+
+                Button:
+                    text: "Log In"
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 60
+                    bold: True
+                    font_size: 16
+                    background_normal: ""
+                    canvas.before:
+                        Color:
+                            rgba: app.get_color_from_hex("#AD590C")
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [15]
+                    on_release:
+                        root.login()
+
+                Widget:
+                    size_hint_y: None
+                    height: 10
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: 30
+                    spacing: 5
+
+                    Label:
+                        text: "Don't have an account?"
+                        color: 1, 1, 1, 1
+                        font_size: 14
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        text_size: None, None
+
+                    Button:
+                        text: "Sign Up"
+                        background_color: 0, 0, 0, 0
+                        color: 1, 1, 1, 1
+                        size_hint_x: None
+                        width: self.texture_size[0] + 20
+                        height: 30
+                        bold: True
+                        font_size: 14
+                        background_normal: ""
+                        canvas.before:
+                            Color:
+                                rgba: 0, 0, 0, 0
+                        canvas.after:
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            Line:
+                                points: [self.x, self.y, self.x + self.width, self.y]
+                                width: 1.5
+                        on_release:
+                            root.go_to_sign_up()
+
+
+<SignUpScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+        padding: 0
+
+        # Top section (white)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.35
+            spacing: 20
+            padding: [0, 50, 0, 0]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint_y: None
+                height: 100
+                allow_stretch: True
+
+            Label:
+                text: "[b][color=#073443]Sign Up[/color][/b]"
+                markup: True
+                font_size: 24
+                color: 0, 0, 0, 1
+                halign: "center"
+                valign: "middle"
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+
+        # Bottom section (blue)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.65
+            padding: [30, 30, 30, 30]
+            spacing: 15
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#07344E")
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [40, 40, 0, 0]
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 15
+                padding: [0,50,0,0]   
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    TextInput:
+                        id: signup_username
+                        hint_text: "Username"
+                        multiline: False
+                        size_hint: 1, 1
+                        padding: [15, 15]
+                        background_color: 0, 0, 0, 0
+                        foreground_color: 0, 0, 0, 1
+                        hint_text_color: 0.5, 0.5, 0.5, 1
+                        background_normal: ""
+                        background_active: ""
+                        write_tab: False
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    TextInput:
+                        id: signup_password
+                        hint_text: "Password"
+                        multiline: False
+                        password: True
+                        size_hint: 1, 1
+                        padding: [15, 15]
+                        background_color: 0, 0, 0, 0
+                        foreground_color: 0, 0, 0, 1
+                        hint_text_color: 0.5, 0.5, 0.5, 1
+                        background_normal: ""
+                        background_active: ""
+                        write_tab: False
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    TextInput:
+                        id: signup_confirm_password
+                        hint_text: "Confirm Password"
+                        multiline: False
+                        password: True
+                        size_hint: 1, 1
+                        padding: [15, 15]
+                        background_color: 0, 0, 0, 0
+                        foreground_color: 0, 0, 0, 1
+                        hint_text_color: 0.5, 0.5, 0.5, 1
+                        background_normal: ""
+                        background_active: ""
+                        write_tab: False
+
+                Widget:
+                    size_hint_y: None
+                    height: 10
+
+                Button:
+                    text: "Sign Up"
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 60
+                    bold: True
+                    font_size: 16
+                    background_normal: ""
+                    canvas.before:
+                        Color:
+                            rgba: app.get_color_from_hex("#AD590C")
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [15]
+                    on_release:
+                        root.sign_up()
+
+                Widget:
+                    size_hint_y: None
+                    height: 10
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: 30
+                    spacing: 5
+
+                    Label:
+                        text: "Already have an account?"
+                        color: 1, 1, 1, 1
+                        font_size: 14
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        text_size: None, None
+
+                    Button:
+                        text: "Log In"
+                        background_color: 0, 0, 0, 0
+                        color: 1, 1, 1, 1
+                        size_hint_x: None
+                        width: self.texture_size[0] + 20
+                        height: 30
+                        bold: True
+                        font_size: 14
+                        background_normal: ""
+                        canvas.before:
+                            Color:
+                                rgba: 0, 0, 0, 0
+                        canvas.after:
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            Line:
+                                points: [self.x, self.y, self.x + self.width, self.y]
+                                width: 1.5
+                        on_release:
+                            root.go_to_login()
