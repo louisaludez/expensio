@@ -1,0 +1,529 @@
+<NotifScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+        padding: 0
+
+        # Top Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 10, 15, 20]
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#FFFFFF")
+                Rectangle:
+                    pos: self.x, self.y
+                    size: self.width, self.height
+
+            Button:
+                
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Menu clicked")
+                Image:
+                    source: "assets/left-arrow.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+            Label:
+                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+                markup: True
+                font_size: 20
+                bold: True
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Button:
+               
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Settings clicked")
+                Image:
+                    source: "assets/settings-b.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+                
+               
+               
+        # Header Section (above ScrollView)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: 70
+            padding: [20, 15, 20, 15]
+            spacing: -5
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Date Row
+            Label:
+                text: "Friday, Oct 31"
+                color: 0.5, 0.5, 0.5, 1
+                font_size: 12
+                halign: "left"
+                valign: "middle"
+                size_hint_y: None
+                height: 20
+                text_size: self.width, None
+
+            # Title Row with Clear Button
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: 30
+
+                Label:
+                    text: "Notifications"
+                    color: 0, 0, 0, 1
+                    font_size: 20
+                    bold: True
+                    halign: "left"
+                    valign: "middle"
+                    size_hint_x: 1
+                    text_size: self.width, None
+
+                Button:
+                    text: "Clear"
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    color: 0, 0, 0, 1
+                    font_size: 14
+                    size_hint_x: None
+                    width: 50
+                    height: 30
+                    on_release:
+                        print("Clear all clicked")
+
+        # Content Area
+        ScrollView:
+            size_hint_y: 1
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 20
+                padding: [20,0, 20, 20]
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Today Section
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 12
+
+                    Label:
+                        text: "Today"
+                        color: app.get_color_from_hex("#07344E")
+                        font_size: 16
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                    # Tip Notification Card
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: [15, 12, 15, 12]
+                        spacing: 6
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#FFA500")
+                            RoundedRectangle:
+                                pos: self.x, self.y
+                                size: self.width, self.height
+                                radius: [12]
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            RoundedRectangle:
+                                pos: self.x + 1, self.y + 1
+                                size: self.width - 2, self.height - 2
+                                radius: [11]
+
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
+
+                            Image:
+                                source: "assets/lightbulb.png"
+                                size_hint: None, None
+                                size: 20, 20
+                                allow_stretch: True
+
+                            Label:
+                                text: "[b][color=#FF8C00]Tip:[/color][/b] Try logging your expenses daily to stay on track."
+                                markup: True
+                                color: 0, 0, 0, 1
+                                font_size: 14
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_x: 1
+                                text_size: self.width, None
+
+                        Label:
+                            text: "1 hour ago"
+                            color: 0.6, 0.6, 0.6, 1
+                            font_size: 12
+                            halign: "left"
+                            valign: "middle"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+                    # Great job Notification Card
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: [15, 12, 15, 12]
+                        spacing: 6
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#32CD32")
+                            RoundedRectangle:
+                                pos: self.x, self.y
+                                size: self.width, self.height
+                                radius: [12]
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            RoundedRectangle:
+                                pos: self.x + 1, self.y + 1
+                                size: self.width - 2, self.height - 2
+                                radius: [11]
+
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
+
+                            Image:
+                                source: "assets/like.png"
+                                size_hint: None, None
+                                size: 20, 20
+                                allow_stretch: True
+
+                            Label:
+                                text: "[b][color=#32CD32]Great job![/color][/b] You saved [b][color=#32CD32]P500[/color][/b] more this week than last."
+                                markup: True
+                                color: 0, 0, 0, 1
+                                font_size: 14
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_x: 1
+                                text_size: self.width, None
+
+                        Label:
+                            text: "2 hours ago"
+                            color: 0.6, 0.6, 0.6, 1
+                            font_size: 12
+                            halign: "left"
+                            valign: "middle"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+                    # Budget Notification Card
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: [15, 12, 15, 12]
+                        spacing: 6
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#FF8C00")
+                            RoundedRectangle:
+                                pos: self.x, self.y
+                                size: self.width, self.height
+                                radius: [12]
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            RoundedRectangle:
+                                pos: self.x + 1, self.y + 1
+                                size: self.width - 2, self.height - 2
+                                radius: [11]
+
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
+
+                            Image:
+                                source: "assets/increase.png"
+                                size_hint: None, None
+                                size: 20, 20
+                                allow_stretch: True
+
+                            Label:
+                                text: "[b][color=#FF8C00]You've reached 80% of your budget:[/color][/b] spend wisely!"
+                                markup: True
+                                color: 0, 0, 0, 1
+                                font_size: 14
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_x: 1
+                                text_size: self.width, None
+
+                        Label:
+                            text: "5 hours ago"
+                            color: 0.6, 0.6, 0.6, 1
+                            font_size: 12
+                            halign: "left"
+                            valign: "middle"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+                # Yesterday Section
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 12
+
+                    Label:
+                        text: "Yesterday"
+                        color: app.get_color_from_hex("#07344E")
+                        font_size: 16
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                    # Update Notification Card
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: [15, 12, 15, 12]
+                        spacing: 6
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#4169E1")
+                            RoundedRectangle:
+                                pos: self.x, self.y
+                                size: self.width, self.height
+                                radius: [12]
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            RoundedRectangle:
+                                pos: self.x + 1, self.y + 1
+                                size: self.width - 2, self.height - 2
+                                radius: [11]
+
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
+
+                            Image:
+                                source: "assets/smartphone.png"
+                                size_hint: None, None
+                                size: 20, 20
+                                allow_stretch: True
+
+                            Label:
+                                text: "[b][color=#4169E1]Update available![/color][/b] Get the latest version for new features."
+                                markup: True
+                                color: 0, 0, 0, 1
+                                font_size: 14
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_x: 1
+                                text_size: self.width, None
+
+                        Label:
+                            text: "10:36 AM"
+                            color: 0.6, 0.6, 0.6, 1
+                            font_size: 12
+                            halign: "left"
+                            valign: "middle"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+                    # Deleted Expense Notification Card
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: [15, 12, 15, 12]
+                        spacing: 6
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#FF4444")
+                            RoundedRectangle:
+                                pos: self.x, self.y
+                                size: self.width, self.height
+                                radius: [12]
+                            Color:
+                                rgba: 1, 1, 1, 1
+                            RoundedRectangle:
+                                pos: self.x + 1, self.y + 1
+                                size: self.width - 2, self.height - 2
+                                radius: [11]
+
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: 10
+
+                            Image:
+                                source: "assets/cross.png"
+                                size_hint: None, None
+                                size: 20, 20
+                                allow_stretch: True
+
+                            Label:
+                                text: "Expense entry deleted successfully."
+                                color: 0, 0, 0, 1
+                                font_size: 14
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_x: 1
+                                text_size: self.width, None
+
+                        Label:
+                            text: "11:21 PM"
+                            color: 0.6, 0.6, 0.6, 1
+                            font_size: 12
+                            halign: "left"
+                            valign: "middle"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+        
+        # Bottom Navigation Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 5, 15, 5]
+            spacing: 38
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'home'
+                Image:
+                    source: "assets/home.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'category'
+                Image:
+                    source: "assets/calendar.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 40
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'add_transaction'
+                Image:
+                    source: "assets/plus.png"
+                    size_hint: None, None
+                    size: 25, 25
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'notif'
+                Image:
+                    source: "assets/notification.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        print("Profile clicked")
+                Image:
+                    source: "assets/profile.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True

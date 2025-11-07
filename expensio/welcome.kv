@@ -1,0 +1,136 @@
+<WelcomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 50
+        padding: 0
+
+        # Top section (white)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.6
+            spacing: 5
+            padding: [0, 50, 0, 0]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint_y: None
+                height: 150
+                allow_stretch: True
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 0
+                padding: 0
+
+                Label:
+                    text: "Track your expenses"
+                    font_size: 18
+                    color: 0, 0, 0, 1
+                    halign: "center"
+                    valign: "middle"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+
+                Label:
+                    text: "[color=#000000]with [/color][b][color=#073443]Expens[/color][color=#AD590C]io[/color][/b]"
+                    markup: True
+                    font_size: 18
+                    halign: "center"
+                    valign: "middle"
+                    color: 0, 0, 0, 1
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+
+        # Bottom section (blue)
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.4
+            padding: [30, 20, 30, 30]
+            spacing: 40
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#07344E")
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [40, 40, 0, 0]
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                Label:
+                    text: "[b]Welcome![/b]"
+                    markup: True
+                    color: 1, 1, 1, 1
+                    font_size: 20
+                    halign: "left"
+                    valign: "middle"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                Label:
+                    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    color: 1, 1, 1, 1
+                    font_size: 14
+                    halign: "left"
+                    valign: "middle"
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            BoxLayout:
+                orientation: "horizontal"
+                spacing: 15
+                size_hint_y: None
+                height: 30
+
+                Button:
+                    text: "Sign Up"
+                    background_color: 0, 0, 0,0
+                    color: 1,1,1,1
+                    size_hint_x: None
+                    size_hint_x: None
+                    width: 115
+                    height: 60
+                    bold: True
+                    background_normal: ""
+                    canvas.before:
+                        Color:
+                            rgba: 0,0,0,1
+                        Line:
+                            rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+                            width: 1.5
+                    on_release:
+                        root.go_to_sign_up() 
+                Button:
+                    text: "Log In"
+                    background_color: 0,0,0,0
+                    color: 1, 1, 1, 1
+                    size_hint_x: None
+                    size_hint_x: None
+                    width: 115
+                    height: 60
+                    bold: True
+                    background_normal: ""
+                    canvas.before:
+                        Color:
+                            rgba: app.get_color_from_hex("#AD590C")
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [15]
+                    on_release:
+                        root.go_to_login()
+

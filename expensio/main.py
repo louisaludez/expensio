@@ -11,7 +11,15 @@ import os
 Window.size = (300, 600)
 Window.clearcolor = (1, 1, 1, 1)
 
-Builder.load_file("expensio.kv")
+# Load all KV files
+Builder.load_file("welcome.kv")
+Builder.load_file("login.kv")
+Builder.load_file("signup.kv")
+Builder.load_file("home.kv")
+Builder.load_file("notif.kv")
+Builder.load_file("category.kv")
+Builder.load_file("chart.kv")
+Builder.load_file("add_transaction.kv")
 
 # Center window
 user32 = ctypes.windll.user32
@@ -24,7 +32,7 @@ Window.top = int((screen_height - Window.size[1]) / 2)
 USERS_FILE = "users.json"
 
 def load_users():
-    """Load users from JSON file"""
+    #Load users from JSON file
     if os.path.exists(USERS_FILE):
         try:
             with open(USERS_FILE, 'r') as f:
@@ -34,7 +42,7 @@ def load_users():
     return {}
 
 def save_users(users):
-    """Save users to JSON file"""
+    # Save users to JSON file
     with open(USERS_FILE, 'w') as f:
         json.dump(users, f, indent=4)
 
@@ -127,9 +135,11 @@ class ExpensioApp(App):
     def build(self):
         self.get_color_from_hex = get_color_from_hex
         sm = ScreenManager()
+
+        sm.add_widget(NotifScreen(name='notif'))
         sm.add_widget(WelcomeScreen(name='welcome'))
         sm.add_widget(HomeScreen(name='home'))
-        sm.add_widget(NotifScreen(name='notif'))
+        
         sm.add_widget(CategoryScreen(name='category'))
         sm.add_widget(ChartScreen(name='chart'))
         sm.add_widget(AddTransactionScreen(name='add_transaction'))
