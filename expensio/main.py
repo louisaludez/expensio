@@ -2,10 +2,14 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 import ctypes
+from kivy.utils import get_color_from_hex
+from kivy.lang import Builder
 
 # Set window properties
-Window.size = (329, 769)
+Window.size = (300, 600)
 Window.clearcolor = (1, 1, 1, 1)
+
+Builder.load_file("expensio.kv")
 
 # Center window
 user32 = ctypes.windll.user32
@@ -26,6 +30,7 @@ class AddTransactionScreen(Screen): pass
 
 class ExpensioApp(App):
     def build(self):
+        self.get_color_from_hex = get_color_from_hex
         sm = ScreenManager()
         sm.add_widget(WelcomeScreen(name='welcome'))
         sm.add_widget(HomeScreen(name='home'))
