@@ -135,12 +135,12 @@ class ExpensioApp(App):
     def build(self):
         self.get_color_from_hex = get_color_from_hex
         sm = ScreenManager()
-
+        sm.add_widget(CategoryScreen(name='category'))
         sm.add_widget(NotifScreen(name='notif'))
         sm.add_widget(WelcomeScreen(name='welcome'))
         sm.add_widget(HomeScreen(name='home'))
         
-        sm.add_widget(CategoryScreen(name='category'))
+        
         sm.add_widget(ChartScreen(name='chart'))
         sm.add_widget(AddTransactionScreen(name='add_transaction'))
         sm.add_widget(LoginScreen(name='login'))

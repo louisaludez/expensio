@@ -1,8 +1,172 @@
+
 <CategoryScreen>:
     BoxLayout:
         orientation: "vertical"
-        Label:
-            text: "Category Screen"
-            halign: "center"
-            valign: "middle"
+        spacing: 0
+        padding: 0
 
+        # Top Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 10, 15, 20]
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#FFFFFF")
+                Rectangle:
+                    pos: self.x, self.y
+                    size: self.width, self.height
+
+            Button:
+                
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Menu clicked")
+                Image:
+                    source: "assets/left-arrow.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+            Label:
+                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+                markup: True
+                font_size: 20
+                bold: True
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Button:
+               
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Settings clicked")
+                Image:
+                    source: "assets/settings-b.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+                
+               
+               
+        # Header Section (above ScrollView)
+        
+        Label:
+            text: "Category Screen - Work in Progress"
+            font_size: 20
+            size_hint_y: 1
+            color: 0, 0, 0, 1
+        # Bottom Navigation Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 5, 15, 5]
+            spacing: 38
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'home'
+                Image:
+                    source: "assets/home.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'category'
+                Image:
+                    source: "assets/calendar.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 40
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'add_transaction'
+                Image:
+                    source: "assets/plus.png"
+                    size_hint: None, None
+                    size: 25, 25
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'notif'
+                Image:
+                    source: "assets/notification.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        print("Profile clicked")
+                Image:
+                    source: "assets/profile.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
