@@ -528,6 +528,7 @@
                     background_normal: ""
                     size_hint: 1, 1
                     on_release:
+                        print("Home clicked")
                         app.root.current = 'home'
                 Image:
                     source: "assets/home.png"
@@ -545,6 +546,7 @@
                     background_normal: ""
                     size_hint: 1, 1
                     on_release:
+                        print("Category clicked")
                         app.root.current = 'category'
                 Image:
                     source: "assets/calendar.png"
@@ -568,6 +570,7 @@
                     background_normal: ""
                     size_hint: 1, 1
                     on_release:
+                        print("Add Transaction clicked")
                         app.root.current = 'add_transaction'
                 Image:
                     source: "assets/plus.png"
@@ -575,6 +578,7 @@
                     size: 30, 30
                     pos_hint: {"center_x": 0.5, "center_y": 0.5}
                     allow_stretch: True
+
 
             FloatLayout:
                 size_hint_x: None
@@ -585,6 +589,7 @@
                     background_normal: ""
                     size_hint: 1, 1
                     on_release:
+                        print("Notification clicked")
                         app.root.current = 'notif'
                 Image:
                     source: "assets/notification.png"
