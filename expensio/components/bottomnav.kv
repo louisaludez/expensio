@@ -1,0 +1,105 @@
+<BottomNavBar>:
+    size_hint_y: None
+    height: 50
+    padding: [10, 5, 10, 5]
+    spacing: 20
+    canvas.before:
+        # White background
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        # Top border for visibility
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        Line:
+            rectangle: (self.x, self.y + self.height - 1, self.width, 1)
+            width: 1
+
+    Widget:
+        size_hint_x: 1
+    
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: 28
+        height: 28
+        ImageButton:
+            source: "assets/home.png"
+            size_hint: None, None
+            size: 24, 24
+            allow_stretch: True
+            on_press:
+                print("Home button clicked")
+                root.navigate_to_screen('home')
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: 28
+        height: 28
+        ImageButton:
+            source: "assets/calendar.png"
+            size_hint: None, None
+            size: 24, 24
+            allow_stretch: True
+            on_press:
+                print("Category button clicked")
+                root.navigate_to_screen('category')
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: 36
+        height: 36
+        canvas.before:
+            Color:
+                rgba: app.get_color_from_hex("#07344E")
+            Ellipse:
+                pos: self.pos
+                size: self.size
+        ImageButton:
+            source: "assets/plus.png"
+            size_hint: None, None
+            size: 22, 22
+            allow_stretch: True
+            on_press:
+                print("Add transaction button clicked")
+                root.navigate_to_screen('add_transaction')
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: 28
+        height: 28
+        ImageButton:
+            source: "assets/notification.png"
+            size_hint: None, None
+            size: 24, 24
+            allow_stretch: True
+            on_press:
+                print("Notif button clicked")
+                root.navigate_to_screen('notif')
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint_x: None
+        width: 28
+        height: 28
+        ImageButton:
+            source: "assets/profile.png"
+            size_hint: None, None
+            size: 24, 24
+            allow_stretch: True
+            on_press:
+                print("Profile button clicked")
+    
+    Widget:
+        size_hint_x: 1
+

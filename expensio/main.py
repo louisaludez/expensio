@@ -7,12 +7,18 @@ from kivy.lang import Builder
 import json
 import os
 from screens.chart import CircularBudgetWidget
+from components.topbar import TopBar
+from components.bottomnav import BottomNavBar
 
 # Set window properties
 Window.size = (300, 600)
 Window.clearcolor = (1, 1, 1, 1)
 
-# Load all KV files
+# Load component KV files first
+Builder.load_file("components/topbar.kv")
+Builder.load_file("components/bottomnav.kv")
+
+# Load all screen KV files
 Builder.load_file("welcome.kv")
 Builder.load_file("login.kv")
 Builder.load_file("signup.kv")
@@ -136,10 +142,13 @@ class ExpensioApp(App):
     def build(self):
         self.get_color_from_hex = get_color_from_hex
         sm = ScreenManager()
+        sm.add_widget(WelcomeScreen(name='welcome'))
         sm.add_widget(ChartScreen(name='chart'))
         sm.add_widget(CategoryScreen(name='category'))
+        
+        
         sm.add_widget(NotifScreen(name='notif'))
-        sm.add_widget(WelcomeScreen(name='welcome'))
+       
         sm.add_widget(HomeScreen(name='home'))
         
         

@@ -1,0 +1,50 @@
+<TopBar>:
+    size_hint_y: None
+    height: 60
+    padding: [15, 10, 15, 20]
+    canvas.before:
+        Color:
+            rgba: app.get_color_from_hex("#FFFFFF")
+        Rectangle:
+            pos: self.x, self.y
+            size: self.width, self.height
+
+    Button:
+        size_hint_x: None
+        size_hint_y: None
+        width: 20
+        height: 20
+        background_color: 0, 0, 0, 0
+        on_release:
+            print("Menu clicked")
+        Image:
+            source: "assets/left-arrow.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size_hint: None, None
+            size: 20, 20
+
+    Label:
+        text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+        markup: True
+        font_size: 20
+        bold: True
+        halign: "center"
+        valign: "middle"
+        text_size: self.width, None
+
+    Button:
+        size_hint_x: None
+        size_hint_y: None
+        width: 20
+        height: 20
+        background_color: 0, 0, 0, 0
+        on_release:
+            print("Settings clicked")
+        Image:
+            source: "assets/settings-b.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size_hint: None, None
+            size: 20, 20
+
