@@ -60,7 +60,7 @@
                 
                
                
-        # Header Section (above ScrollView)
+        # Header Section 
         BoxLayout:                  
             size_hint_y: None
             height: 40
@@ -115,488 +115,379 @@
                     padding_y: [self.height / 2 - self.line_height / 2]
         
         # Main Content Area (ScrollView)
-        ScrollView:
-            do_scroll_x: False
-            do_scroll_y: True
-            bar_width: 0
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 10
+            padding: [10, 10, 10, 0]
+            size_hint: 1, 1
             
-            BoxLayout:
-                orientation: "vertical"
-                spacing: 15
-                padding: [15, 15, 15, 15]
+            Button:
+                text: 'Personal'
+                background_normal: ''
+                background_color: 0,0,0,0
+                background_down: ''
+                color: app.get_color_from_hex("#FFFFFF")    
+                font_size: 12
+                bold: True
                 size_hint_y: None
-                height: self.minimum_height
-                
-                # Category Selection Bar (Personal, Bills, etc.)
-                ScrollView:
+                size_hint_x: None
+                height: 30
+                width: 90
+               
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [10]
+            ScrollView:
+                do_scroll_x: True
+                do_scroll_y: False
+
+                BoxLayout:
+                    orientation:'horizontal'
+                    size_hint_x: 1
                     size_hint_y: None
-                    height: 50
-                    do_scroll_x: True
-                    do_scroll_y: False
-                    bar_width: 0
-                    
-                    BoxLayout:
-                        orientation: "horizontal"
-                        spacing: 10
-                        size_hint_x: None
-                        width: self.minimum_width
-                        padding: [0, 5, 0, 5]
-                        
-                        # Personal Button (Selected)
-                        Button:
-                            size_hint_x: None
-                            width: 100
-                            height: 40
-                            text: "Personal"
-                            font_size: 14
-                            bold: True
-                            background_color: app.get_color_from_hex("#07344E")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#07344E")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                        
-                        # Bills Button
-                        Button:
-                            size_hint_x: None
-                            width: 100
-                            height: 40
-                            text: "Bills"
-                            font_size: 14
-                            bold: True
-                            background_color: app.get_color_from_hex("#AD590C")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#AD590C")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                        
-                        # Right Arrow Indicator
-                        Widget:
-                            size_hint_x: None
-                            width: 20
-                
-                # Category Cards Grid
-                GridLayout:
-                    cols: 2
+                    padding: [5, 30, 10, 0]
                     spacing: 15
-                    size_hint_y: None
-                    height: self.minimum_height
-                    row_default_height: 180
-                    row_force_default: True
-                    
-                    # Skincare Card
+                    #Items inside the ScrollView
                     BoxLayout:
-                        orientation: "vertical"
-                        spacing: 10
-                        padding: [15, 15, 15, 15]
+                        orientation: 'vertical'
                         size_hint: None, None
-                        size: self.parent.width / 2 - 7.5, 180
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        width: 100
+                        height: 120
+                        background_color: 0,0,0,0
+                        background_normal: ''
+                        padding: [10,10, 10, 10]
+                        spacing: 5
                         canvas.before:
                             Color:
-                                rgba: 1, 1, 1, 1
+                                rgba: 0,0,0,0.1
+                            Line:
+                                rectangle: (self.x, self.y, self.width, self.height)
+                                width: 2
+                            Color:
+                                rgba: app.get_color_from_hex("#FFFFFF")
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
-                                radius: [12]
-                            Color:
-                                rgba: app.get_color_from_hex("#E0E0E0")
-                            Line:
-                                rounded_rectangle: [self.x, self.y, self.width, self.height, 12]
-                                width: 1
-                        
-                        # Icon placeholder (you can replace with actual skincare icon)
-                        BoxLayout:
-                            size_hint_y: None
-                            height: 80
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#FFE4E1")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            Widget:
-                                size_hint: 1, 1
-                        
+                                radius: [10]
+                            
+                            
+
+                        Image:
+                            source: "assets/skincare.png"
+                            size_hint: None, None
+                            size: 60, 60
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
                         Label:
                             text: "Skincare"
-                            font_size: 14
-                            bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "center"
-                            size_hint_y: None
-                            height: 20
-                            text_size: self.width, None
-                        
-                        Button:
-                            size_hint_y: None
-                            height: 30
-                            text: "View"
                             font_size: 12
-                            background_color: app.get_color_from_hex("#FF8C00")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
+                            color: app.get_color_from_hex("#000000")
+                            bold: True
+                        Button:
+                            text: "View"
+                            background_color: 0,0,0,0
+                            background_normal: ''
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            color: app.get_color_from_hex("#FFFFFF")
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 20
+                            width: 60
+                            font_size: 10
+                            bold: True
                             canvas.before:
                                 Color:
-                                    rgba: app.get_color_from_hex("#FF8C00")
+                                    rgba: app.get_color_from_hex("#FF6813")
                                 RoundedRectangle:
                                     pos: self.pos
                                     size: self.size
-                                    radius: [6]
+                                    radius: [10]
                     
-                    # Travel Card
                     BoxLayout:
-                        orientation: "vertical"
-                        spacing: 10
-                        padding: [15, 15, 15, 15]
+                        orientation: 'vertical'
                         size_hint: None, None
-                        size: self.parent.width / 2 - 7.5, 180
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        width: 100
+                        height: 120
+                        background_color: 0,0,0,0
+                        background_normal: ''
+                        padding: [10,10, 10, 10]
+                        spacing: 5
                         canvas.before:
                             Color:
-                                rgba: 1, 1, 1, 1
+                                rgba: 0,0,0,0.1
+                            Line:
+                                rectangle: (self.x, self.y, self.width, self.height)
+                                width: 2
+                            Color:
+                                rgba: app.get_color_from_hex("#FFFFFF")
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
-                                radius: [12]
-                            Color:
-                                rgba: app.get_color_from_hex("#E0E0E0")
-                            Line:
-                                rounded_rectangle: [self.x, self.y, self.width, self.height, 12]
-                                width: 1
-                        
-                        # Icon placeholder
-                        BoxLayout:
-                            size_hint_y: None
-                            height: 80
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#E0F2F1")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            Widget:
-                                size_hint: 1, 1
-                        
+                                radius: [10]
+                            
+                            
+
+                        Image:
+                            source: "assets/travel.png"
+                            size_hint: None, None
+                            size: 60, 60
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
                         Label:
                             text: "Travel"
-                            font_size: 14
-                            bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "center"
-                            size_hint_y: None
-                            height: 20
-                            text_size: self.width, None
-                        
-                        Button:
-                            size_hint_y: None
-                            height: 30
-                            text: "View"
                             font_size: 12
-                            background_color: app.get_color_from_hex("#07344E")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
+                            color: app.get_color_from_hex("#000000")
+                            bold: True
+                        Button:
+                            text: "View"
+                            background_color: 0,0,0,0
+                            background_normal: ''
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            color: app.get_color_from_hex("#FFFFFF")
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 20
+                            width: 60
+                            font_size: 10
+                            bold: True
                             canvas.before:
                                 Color:
-                                    rgba: app.get_color_from_hex("#07344E")
+                                    rgba: app.get_color_from_hex("#7395EC")
                                 RoundedRectangle:
                                     pos: self.pos
                                     size: self.size
-                                    radius: [6]
-                    
-                    # Water Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        spacing: 10
-                        padding: [15, 15, 15, 15]
+                                    radius: [10]
+#Bills Category Section
+            BoxLayout:   
+                size_hint_y: None
+                size_hint_x: 1
+                orientation: 'horizontal'
+                spacing: 10
+                height: 10   
+                Button:
+                    text: 'Bills'
+                    background_normal: ''
+                    background_color: 0,0,0,0
+                    background_down: ''
+                    color: app.get_color_from_hex("#FFFFFF")    
+                    font_size: 12
+                    bold: True
+                    size_hint_y: None
+                    size_hint_x: None
+                    height: 30
+                    width: 90
+                
+                    canvas.before:
+                        Color:
+                            rgba: app.get_color_from_hex("#AD590C")
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                Button:
+                
+                    size_hint_x: 1
+                    size_hint_y: None
+                    width: 60
+                    height: 30
+                    background_color: 0, 0, 0, 0
+            
+                    on_release:
+                        print("Menu clicked")
+                    Image:
+                        source: "assets/right-arrow.png"
+                        center_x: self.parent.center_x 
+                        center_y: self.parent.center_y
                         size_hint: None, None
-                        size: self.parent.width / 2 - 7.5, 180
+                        size: 20, 20
+
+            ScrollView:
+                do_scroll_x: True
+                do_scroll_y: False
+                
+                BoxLayout:
+                    orientation:'horizontal'
+                    size_hint_x: None
+                    size_hint_y: None
+                    padding: [10, 50, 10, 10]
+                    width: self.minimum_width
+                    spacing: 15
+                    #Items inside the ScrollView
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        width: 100
+                        height: 120
+                        background_color: 0,0,0,0
+                        background_normal: ''
+                        padding: [10,10, 10, 10]
+                       
                         canvas.before:
                             Color:
-                                rgba: 1, 1, 1, 1
+                                rgba: 0,0,0,0.1
+                            Line:
+                                rectangle: (self.x, self.y, self.width, self.height)
+                                width: 2
+                            Color:
+                                rgba: app.get_color_from_hex("#FFFFFF")
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
-                                radius: [12]
-                            Color:
-                                rgba: app.get_color_from_hex("#E0E0E0")
-                            Line:
-                                rounded_rectangle: [self.x, self.y, self.width, self.height, 12]
-                                width: 1
-                        
-                        # Icon placeholder
-                        BoxLayout:
-                            size_hint_y: None
-                            height: 80
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#E3F2FD")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            Widget:
-                                size_hint: 1, 1
-                        
+                                radius: [10]
+                            
+                            
+
+                        Image:
+                            source: "assets/drop.png"
+                            size_hint: None, None
+                            size: 60, 60
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
                         Label:
                             text: "Water"
-                            font_size: 14
-                            bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "center"
-                            size_hint_y: None
-                            height: 20
-                            text_size: self.width, None
-                        
-                        Button:
-                            size_hint_y: None
-                            height: 30
-                            text: "View"
                             font_size: 12
-                            background_color: app.get_color_from_hex("#07344E")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
+                            color: app.get_color_from_hex("#000000")
+                            bold: True
+                        Button:
+                            text: "View"
+                            background_color: 0,0,0,0
+                            background_normal: ''
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            color: app.get_color_from_hex("#FFFFFF")
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 20
+                            width: 60
+                            font_size: 10
+                            bold: True
                             canvas.before:
                                 Color:
-                                    rgba: app.get_color_from_hex("#07344E")
+                                    rgba: app.get_color_from_hex("#1E45A9")
                                 RoundedRectangle:
                                     pos: self.pos
                                     size: self.size
-                                    radius: [6]
+                                    radius: [10]
                     
-                    # Electricity Card
                     BoxLayout:
-                        orientation: "vertical"
-                        spacing: 10
-                        padding: [15, 15, 15, 15]
+                        orientation: 'vertical'
                         size_hint: None, None
-                        size: self.parent.width / 2 - 7.5, 180
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        width: 100
+                        height: 120
+                        background_color: 0,0,0,0
+                        background_normal: ''
+                        padding: [10,10, 10, 10]
+                        spacing: 5
                         canvas.before:
                             Color:
-                                rgba: 1, 1, 1, 1
+                                rgba: 0,0,0,0.1
+                            Line:
+                                rectangle: (self.x, self.y, self.width, self.height)
+                                width: 2
+                            Color:
+                                rgba: app.get_color_from_hex("#FFFFFF")
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
-                                radius: [12]
-                            Color:
-                                rgba: app.get_color_from_hex("#E0E0E0")
-                            Line:
-                                rounded_rectangle: [self.x, self.y, self.width, self.height, 12]
-                                width: 1
-                        
-                        # Icon placeholder (using lightbulb asset)
-                        BoxLayout:
-                            size_hint_y: None
-                            height: 80
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#FFF9C4")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            Image:
-                                source: "assets/lightbulb.png"
-                                size_hint: None, None
-                                size: 40, 40
-                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                allow_stretch: True
-                        
+                                radius: [10]
+                            
+                            
+
+                        Image:
+                            source: "assets/electrical.png"
+                            size_hint: None, None
+                            size: 60, 60
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
                         Label:
                             text: "Electricity"
-                            font_size: 14
-                            bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "center"
-                            size_hint_y: None
-                            height: 20
-                            text_size: self.width, None
-                        
-                        Button:
-                            size_hint_y: None
-                            height: 30
-                            text: "View"
                             font_size: 12
-                            background_color: app.get_color_from_hex("#32CD32")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
+                            color: app.get_color_from_hex("#000000")
+                            bold: True
+                        Button:
+                            text: "View"
+                            background_color: 0,0,0,0
+                            background_normal: ''
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            color: app.get_color_from_hex("#FFFFFF")
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 20
+                            width: 60
+                            font_size: 10
+                            bold: True
                             canvas.before:
                                 Color:
-                                    rgba: app.get_color_from_hex("#32CD32")
+                                    rgba: app.get_color_from_hex("#0D4B59")
                                 RoundedRectangle:
                                     pos: self.pos
                                     size: self.size
-                                    radius: [6]
-                    
-                    # Mobile Card
+                                    radius: [10]
                     BoxLayout:
-                        orientation: "vertical"
-                        spacing: 10
-                        padding: [15, 15, 15, 15]
+                        orientation: 'vertical'
                         size_hint: None, None
-                        size: self.parent.width / 2 - 7.5, 180
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        width: 100
+                        height: 120
+                        background_color: 0,0,0,0
+                        background_normal: ''
+                        padding: [10,10, 10, 10]
+                        spacing: 5
                         canvas.before:
                             Color:
-                                rgba: 1, 1, 1, 1
+                                rgba: 0,0,0,0.1
+                            Line:
+                                rectangle: (self.x, self.y, self.width, self.height)
+                                width: 2
+                            Color:
+                                rgba: app.get_color_from_hex("#FFFFFF")
                             RoundedRectangle:
                                 pos: self.pos
                                 size: self.size
-                                radius: [12]
-                            Color:
-                                rgba: app.get_color_from_hex("#E0E0E0")
-                            Line:
-                                rounded_rectangle: [self.x, self.y, self.width, self.height, 12]
-                                width: 1
-                        
-                        # Icon (using smartphone asset)
-                        BoxLayout:
-                            size_hint_y: None
-                            height: 80
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#E8F5E9")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            Image:
-                                source: "assets/smartphone.png"
-                                size_hint: None, None
-                                size: 40, 40
-                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                allow_stretch: True
-                        
+                                radius: [10]
+                            
+                            
+
+                        Image:
+                            source: "assets/insurance.png"
+                            size_hint: None, None
+                            size: 60, 60
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
                         Label:
-                            text: "Mobile"
-                            font_size: 14
+                            text: ""
+                            font_size: 12
+                            color: app.get_color_from_hex("#000000")
                             bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "center"
+                        Button:
+                            text: "View"
+                            background_color: 0,0,0,0
+                            background_normal: ''
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            color: app.get_color_from_hex("#FFFFFF")
                             size_hint_y: None
+                            size_hint_x: None
                             height: 20
-                            text_size: self.width, None
-                        
-                        Button:
-                            size_hint_y: None
-                            height: 30
-                            text: "Add"
-                            font_size: 12
-                            background_color: app.get_color_from_hex("#32CD32")
-                            color: 1, 1, 1, 1
-                            background_normal: ""
+                            width: 60
+                            font_size: 10
+                            bold: True
                             canvas.before:
                                 Color:
-                                    rgba: app.get_color_from_hex("#32CD32")
+                                    rgba: app.get_color_from_hex("#275926")
                                 RoundedRectangle:
                                     pos: self.pos
                                     size: self.size
-                                    radius: [6]
-                
-                # Budget Overview Section
-                BoxLayout:
-                    orientation: "vertical"
-                    spacing: 10
-                    size_hint_y: None
-                    height: 120
+                                    radius: [10]
                     
-                    # Budget Overview Header
-                    BoxLayout:
-                        size_hint_y: None
-                        height: 30
-                        padding: [0, 0, 0, 0]
-                        
-                        Label:
-                            text: "Budget Overview"
-                            font_size: 16
-                            bold: True
-                            color: app.get_color_from_hex("#2C2C2C")
-                            halign: "left"
-                            valign: "middle"
-                            text_size: self.width, None
-                            size_hint_x: 1
-                        
-                        Button:
-                            size_hint_x: None
-                            width: 60
-                            text: "View all"
-                            font_size: 12
-                            background_color: 0, 0, 0, 0
-                            color: app.get_color_from_hex("#999999")
-                            background_normal: ""
-                            halign: "right"
-                    
-                    # Budget Cards ScrollView
-                    ScrollView:
-                        size_hint_y: None
-                        height: 80
-                        do_scroll_x: True
-                        do_scroll_y: False
-                        bar_width: 0
-                        
-                        BoxLayout:
-                            orientation: "horizontal"
-                            spacing: 10
-                            size_hint_x: None
-                            width: self.minimum_width
-                            padding: [0, 0, 0, 0]
-                            
-                            # Budget Card (Brown)
-                            BoxLayout:
-                                orientation: "vertical"
-                                size_hint_x: None
-                                width: 200
-                                height: 80
-                                padding: [15, 10, 15, 10]
-                                canvas.before:
-                                    Color:
-                                        rgba: app.get_color_from_hex("#8B4513")
-                                    RoundedRectangle:
-                                        pos: self.pos
-                                        size: self.size
-                                        radius: [12]
-                                
-                                Label:
-                                    text: "Monthly Budget"
-                                    font_size: 12
-                                    color: 1, 1, 1, 1
-                                    halign: "left"
-                                    size_hint_y: None
-                                    height: 20
-                                    text_size: self.width, None
-                                
-                                Label:
-                                    text: "₱5,000"
-                                    font_size: 18
-                                    bold: True
-                                    color: 1, 1, 1, 1
-                                    halign: "left"
-                                    size_hint_y: None
-                                    height: 30
-                                    text_size: self.width, None
-                                
-                                Widget:
-                                    size_hint_y: None
-                                    height: 10
-                            
-                            # Right Arrow Indicator
-                            Widget:
-                                size_hint_x: None
-                                width: 20
-        
         # Bottom Navigation Bar
-        Widget:
-            size_hint_y: 1
-            height: 1
+       
         BoxLayout:
             size_hint_y: None
             height: 60

@@ -1,8 +1,467 @@
 <ChartScreen>:
     BoxLayout:
         orientation: "vertical"
-        Label:
-            text: "Chart Screen"
-            halign: "center"
-            valign: "middle"
+        spacing: 0
+        padding: 0
+
+        # Top Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 10, 15, 20]
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#FFFFFF")
+                Rectangle:
+                    pos: self.x, self.y
+                    size: self.width, self.height
+
+            Button:
+                
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Menu clicked")
+                Image:
+                    source: "assets/left-arrow.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+            Label:
+                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+                markup: True
+                font_size: 20
+                bold: True
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Button:
+               
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Settings clicked")
+                Image:
+                    source: "assets/settings-b.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+        #Main Content Area
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation: "vertical"
+                padding: [15, 15, 15, 15]
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height  
+
+                # Last Month Section
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 25
+                    spacing: 10
+                    
+                   
+                    Label:
+                        text: 'Last Month'
+                        size_hint_y: None
+                        height: 20
+                        font_size: 14
+                        bold: True
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size
+                        color: app.get_color_from_hex("#000000")
+                
+                # Budget text (indented)
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 20
+                    padding: [30, 0, 0, 0]  # Indent to align with text after radio button
+                    
+                    Label:
+                        text: '₱ 20, 800 was your previous budget.'
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: 20
+                        font_size: 12
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size
+                        color: app.get_color_from_hex("#000000")
+                
+                # Gray separator line
+                Widget:
+                    size_hint_y: None
+                    height: 1
+                    canvas.before:
+                        Color:
+                            rgba: 0.7, 0.7, 0.7, 1  # Gray color
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                # Current Month Section
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 25
+                    spacing: 10
+                    
+                    
+                    Label:
+                        text: 'Current Month'
+                        size_hint_y: None
+                        height: 20
+                        font_size: 14
+                        bold: True
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size
+                        color: app.get_color_from_hex("#000000")
+                
+                # Motivational message
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 40
+                    padding: [30, 5, 0, 0]  # Indent to align with text after radio button
+                    
+                    Label:
+                        text: '[b][i][color=#AD590C]You are doing well in keeping on track with your budget![/color][/i][/b]'
+                        markup: True
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: 40
+                        font_size: 14
+                        halign: 'center'
+                        valign: 'top'
+                        text_size: self.size
+                
+                # View Budget Overview text
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 20
+                    padding: [30, 0, 0, 0]  # Indent to align with text after radio button
+                    
+                    Label:
+                        text: 'View Budget Overview for detailed summary.'
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: 20
+                        font_size: 10
+                        halign: 'center'
+                        valign: 'middle'
+                        text_size: self.size
+                        color: app.get_color_from_hex("#07344E")
+                BoxLayout:
+                    size_hint_y: None
+                    height: 200
+                    padding: [0, 20, 0, 20]
+                    
+                    Widget:
+                        # Spacer to center content
+                        size_hint_x: 1
+                    
+                    RelativeLayout:
+                        size_hint: None, None
+                        size: 180, 180
+                        
+                        CircularBudgetWidget:
+                            size_hint: None, None
+                            size: 180, 180
+                            pos: 0, 0
+                            progress: 0.85
+                        
+                        # Text content overlay
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 140, 50
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            spacing: 4
+                            
+                            Label:
+                                text: "₱ 20,650"
+                                halign: 'center'
+                                valign: 'middle'
+                                font_size: 20
+                                bold: True
+                                size_hint_y: None
+                                height: 28
+                                text_size: self.size
+                                color: app.get_color_from_hex("#07344E")  # Dark teal
+                            
+                            Label:
+                                text: "Monthly Budget"
+                                halign: 'center'
+                                valign: 'middle'
+                                font_size: 10
+                                size_hint_y: None
+                                height: 16
+                                text_size: self.size
+                                color: app.get_color_from_hex("#666666")  # Gray
+                    
+                    Widget:
+                        # Spacer to center content
+                        size_hint_x: 1
+                #Category Summary
+                
+                
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: 80
+                    padding: [0, 5, 0, 5]
+                    spacing: 8
+
+                    # Food Category Card
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 1
+                        spacing: 4
+                        padding: [10, 10, 10, 10]
+                        canvas.before:
+                            Color:
+                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [12]
+                        canvas.after:
+                            # Shadow effect
+                            Color:
+                                rgba: 0, 0, 0, 0.2
+                            RoundedRectangle:
+                                pos: self.x - 1, self.y - 1
+                                size: self.size
+                                radius: [12]
+                        Label:
+                            text: "2"
+                            font_size: 18
+                            bold: True
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: 1, 1, 1, 1  # White
+                            size_hint_y: None
+                            height: 22
+                        Label:
+                            text: "Food"
+                            font_size: 12
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: app.get_color_from_hex("#AD590C")  # Orange
+                            size_hint_y: None
+                            height: 16
+
+                    # Transpo Category Card
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 1
+                        spacing: 4
+                        padding: [10, 10, 10, 10]
+                        canvas.before:
+                            Color:
+                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [12]
+                        canvas.after:
+                            # Shadow effect
+                            Color:
+                                rgba: 0, 0, 0, 0.2
+                            RoundedRectangle:
+                                pos: self.x - 1, self.y - 1
+                                size: self.size
+                                radius: [12]
+                        Label:
+                            text: "1,598"
+                            font_size: 18
+                            bold: True
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: 1, 1, 1, 1  # White
+                            size_hint_y: None
+                            height: 22
+                        Label:
+                            text: "Transpo"
+                            font_size: 12
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: app.get_color_from_hex("#AD590C")  # Orange
+                            size_hint_y: None
+                            height: 16
+
+                    # Shopping Category Card
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 1
+                        spacing: 4
+                        padding: [10, 10, 10, 10]
+                        canvas.before:
+                            Color:
+                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [12]
+                        canvas.after:
+                            # Shadow effect
+                            Color:
+                                rgba: 0, 0, 0, 0.2
+                            RoundedRectangle:
+                                pos: self.x - 1, self.y - 1
+                                size: self.size
+                                radius: [12]
+                        Label:
+                            text: "1,246"
+                            font_size: 18
+                            bold: True
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: 1, 1, 1, 1  # White
+                            size_hint_y: None
+                            height: 22
+                        Label:
+                            text: "Shopping"
+                            font_size: 12
+                            halign: 'left'
+                            valign: 'top'
+                            text_size: self.size
+                            color: app.get_color_from_hex("#AD590C")  # Orange
+                            size_hint_y: None
+                            height: 16
+
+                
+  
+        # Bottom Navigation Bar
+       
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 5, 15, 5]
+            spacing: 38
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'home'
+                Image:
+                    source: "assets/home.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'category'
+                Image:
+                    source: "assets/calendar.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 40
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'add_transaction'
+                Image:
+                    source: "assets/plus.png"
+                    size_hint: None, None
+                    size: 25, 25
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        app.root.current = 'notif'
+                Image:
+                    source: "assets/notification.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+            FloatLayout:
+                size_hint_x: None
+                width: 20
+                height: 20
+                Button:
+                    background_color: 0, 0, 0, 0
+                    background_normal: ""
+                    size_hint: 1, 1
+                    on_release:
+                        print("Profile clicked")
+                Image:
+                    source: "assets/profile.png"
+                    size_hint: None, None
+                    size: 20, 20
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    allow_stretch: True
+
+
+
+
+
 
