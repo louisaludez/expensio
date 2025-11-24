@@ -44,7 +44,8 @@
                     padding: [30, 0, 0, 0]  # Indent to align with text after radio button
                     
                     Label:
-                        text: '₱ 20, 800 was your previous budget.'
+                        id: last_month_budget_label
+                        text: '₱ 0 was your previous budget.'
                         size_hint_x: 1
                         size_hint_y: None
                         height: 20
@@ -92,6 +93,7 @@
                     padding: [30, 5, 0, 0]  # Indent to align with text after radio button
                     
                     Label:
+                        id: motivational_label
                         text: '[b][i][color=#AD590C]You are doing well in keeping on track with your budget![/color][/i][/b]'
                         markup: True
                         size_hint_x: 1
@@ -133,10 +135,11 @@
                         size: 180, 180
                         
                         CircularBudgetWidget:
+                            id: budget_widget
                             size_hint: None, None
                             size: 180, 180
                             pos: 0, 0
-                            progress: 0.85
+                            progress: 0.0
                         
                         # Text content overlay
                         BoxLayout:
@@ -147,7 +150,8 @@
                             spacing: 4
                             
                             Label:
-                                text: "₱ 20,650"
+                                id: budget_amount_label
+                                text: "₱ 0"
                                 halign: 'center'
                                 valign: 'middle'
                                 font_size: 20
@@ -202,7 +206,8 @@
                                 size: self.size
                                 radius: [12]
                         Label:
-                            text: "2"
+                            id: food_count_label
+                            text: "0"
                             font_size: 18
                             bold: True
                             halign: 'left'
@@ -243,7 +248,8 @@
                                 size: self.size
                                 radius: [12]
                         Label:
-                            text: "1,598"
+                            id: transport_count_label
+                            text: "0"
                             font_size: 18
                             bold: True
                             halign: 'left'
@@ -284,7 +290,8 @@
                                 size: self.size
                                 radius: [12]
                         Label:
-                            text: "1,246"
+                            id: shopping_count_label
+                            text: "0"
                             font_size: 18
                             bold: True
                             halign: 'left'

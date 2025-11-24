@@ -63,9 +63,9 @@
         BoxLayout:
             orientation: "vertical"
             size_hint_y: None
-            height: 70
-            padding: [20, 15, 20, 15]
-            spacing: -5
+            height: 80
+            padding: [20, 15, 20, 10]
+            spacing: 5
             canvas.before:
                 Color:
                     rgba: 1, 1, 1, 1
@@ -75,6 +75,7 @@
 
             # Date Row
             Label:
+                id: date_label
                 text: "Friday, Oct 31"
                 color: 0.5, 0.5, 0.5, 1
                 font_size: 12
@@ -88,7 +89,7 @@
             BoxLayout:
                 orientation: "horizontal"
                 size_hint_y: None
-                height: 30
+                height: 35
 
                 Label:
                     text: "Notifications"
@@ -110,319 +111,20 @@
                     width: 50
                     height: 30
                     on_release:
-                        print("Clear all clicked")
+                        root.clear_all_notifications()
 
         # Content Area
         ScrollView:
+            id: notifications_scroll
             size_hint_y: 1
             do_scroll_x: False
             do_scroll_y: True
             BoxLayout:
                 orientation: "vertical"
-                spacing: 20
-                padding: [20,0, 20, 20]
+                spacing: 12
+                padding: [20, 10, 20, 20]
                 size_hint_y: None
                 height: self.minimum_height
-
-                # Today Section
-                BoxLayout:
-                    orientation: "vertical"
-                    size_hint_y: None
-                    height: self.minimum_height
-                    spacing: 12
-
-                    Label:
-                        text: "Today"
-                        color: app.get_color_from_hex("#07344E")
-                        font_size: 16
-                        bold: True
-                        halign: "left"
-                        valign: "middle"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-                        text_size: self.width, None
-
-                    # Tip Notification Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: [15, 12, 15, 12]
-                        spacing: 6
-                        canvas.before:
-                            Color:
-                                rgba: app.get_color_from_hex("#FFA500")
-                            RoundedRectangle:
-                                pos: self.x, self.y
-                                size: self.width, self.height
-                                radius: [12]
-                            Color:
-                                rgba: 1, 1, 1, 1
-                            RoundedRectangle:
-                                pos: self.x + 1, self.y + 1
-                                size: self.width - 2, self.height - 2
-                                radius: [11]
-
-                        BoxLayout:
-                            orientation: "horizontal"
-                            size_hint_y: None
-                            height: self.minimum_height
-                            spacing: 10
-
-                            Image:
-                                source: "assets/lightbulb.png"
-                                size_hint: None, None
-                                size: 20, 20
-                                allow_stretch: True
-
-                            Label:
-                                text: "[b][color=#FF8C00]Tip:[/color][/b] Try logging your expenses daily to stay on track."
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_x: 1
-                                text_size: self.width, None
-
-                        Label:
-                            text: "1 hour ago"
-                            color: 0.6, 0.6, 0.6, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                    # Great job Notification Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: [15, 12, 15, 12]
-                        spacing: 6
-                        canvas.before:
-                            Color:
-                                rgba: app.get_color_from_hex("#32CD32")
-                            RoundedRectangle:
-                                pos: self.x, self.y
-                                size: self.width, self.height
-                                radius: [12]
-                            Color:
-                                rgba: 1, 1, 1, 1
-                            RoundedRectangle:
-                                pos: self.x + 1, self.y + 1
-                                size: self.width - 2, self.height - 2
-                                radius: [11]
-
-                        BoxLayout:
-                            orientation: "horizontal"
-                            size_hint_y: None
-                            height: self.minimum_height
-                            spacing: 10
-
-                            Image:
-                                source: "assets/like.png"
-                                size_hint: None, None
-                                size: 20, 20
-                                allow_stretch: True
-
-                            Label:
-                                text: "[b][color=#32CD32]Great job![/color][/b] You saved [b][color=#32CD32]P500[/color][/b] more this week than last."
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_x: 1
-                                text_size: self.width, None
-
-                        Label:
-                            text: "2 hours ago"
-                            color: 0.6, 0.6, 0.6, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                    # Budget Notification Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: [15, 12, 15, 12]
-                        spacing: 6
-                        canvas.before:
-                            Color:
-                                rgba: app.get_color_from_hex("#FF8C00")
-                            RoundedRectangle:
-                                pos: self.x, self.y
-                                size: self.width, self.height
-                                radius: [12]
-                            Color:
-                                rgba: 1, 1, 1, 1
-                            RoundedRectangle:
-                                pos: self.x + 1, self.y + 1
-                                size: self.width - 2, self.height - 2
-                                radius: [11]
-
-                        BoxLayout:
-                            orientation: "horizontal"
-                            size_hint_y: None
-                            height: self.minimum_height
-                            spacing: 10
-
-                            Image:
-                                source: "assets/increase.png"
-                                size_hint: None, None
-                                size: 20, 20
-                                allow_stretch: True
-
-                            Label:
-                                text: "[b][color=#FF8C00]You've reached 80% of your budget:[/color][/b] spend wisely!"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_x: 1
-                                text_size: self.width, None
-
-                        Label:
-                            text: "5 hours ago"
-                            color: 0.6, 0.6, 0.6, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                # Yesterday Section
-                BoxLayout:
-                    orientation: "vertical"
-                    size_hint_y: None
-                    height: self.minimum_height
-                    spacing: 12
-
-                    Label:
-                        text: "Yesterday"
-                        color: app.get_color_from_hex("#07344E")
-                        font_size: 16
-                        bold: True
-                        halign: "left"
-                        valign: "middle"
-                        size_hint_y: None
-                        height: self.texture_size[1]
-                        text_size: self.width, None
-
-                    # Update Notification Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: [15, 12, 15, 12]
-                        spacing: 6
-                        canvas.before:
-                            Color:
-                                rgba: app.get_color_from_hex("#4169E1")
-                            RoundedRectangle:
-                                pos: self.x, self.y
-                                size: self.width, self.height
-                                radius: [12]
-                            Color:
-                                rgba: 1, 1, 1, 1
-                            RoundedRectangle:
-                                pos: self.x + 1, self.y + 1
-                                size: self.width - 2, self.height - 2
-                                radius: [11]
-
-                        BoxLayout:
-                            orientation: "horizontal"
-                            size_hint_y: None
-                            height: self.minimum_height
-                            spacing: 10
-
-                            Image:
-                                source: "assets/smartphone.png"
-                                size_hint: None, None
-                                size: 20, 20
-                                allow_stretch: True
-
-                            Label:
-                                text: "[b][color=#4169E1]Update available![/color][/b] Get the latest version for new features."
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_x: 1
-                                text_size: self.width, None
-
-                        Label:
-                            text: "10:36 AM"
-                            color: 0.6, 0.6, 0.6, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                    # Deleted Expense Notification Card
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: [15, 12, 15, 12]
-                        spacing: 6
-                        canvas.before:
-                            Color:
-                                rgba: app.get_color_from_hex("#FF4444")
-                            RoundedRectangle:
-                                pos: self.x, self.y
-                                size: self.width, self.height
-                                radius: [12]
-                            Color:
-                                rgba: 1, 1, 1, 1
-                            RoundedRectangle:
-                                pos: self.x + 1, self.y + 1
-                                size: self.width - 2, self.height - 2
-                                radius: [11]
-
-                        BoxLayout:
-                            orientation: "horizontal"
-                            size_hint_y: None
-                            height: self.minimum_height
-                            spacing: 10
-
-                            Image:
-                                source: "assets/cross.png"
-                                size_hint: None, None
-                                size: 20, 20
-                                allow_stretch: True
-
-                            Label:
-                                text: "Expense entry deleted successfully."
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_x: 1
-                                text_size: self.width, None
-
-                        Label:
-                            text: "11:21 PM"
-                            color: 0.6, 0.6, 0.6, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
         
         # Bottom Navigation Bar
         BottomNavBar:

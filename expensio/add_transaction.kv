@@ -3,13 +3,538 @@
         orientation: "vertical"
         spacing: 0
         padding: 0
-        
-        # Content area
-        Label:
-            text: "Add Transaction Screen"
-            halign: "center"
-            valign: "middle"
-        
+
+        # Top Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 10, 15, 20]
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#FFFFFF")
+                Rectangle:
+                    pos: self.x, self.y
+                    size: self.width, self.height
+
+            Button:
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    app.root.current = 'home'
+                Image:
+                    source: "assets/left-arrow.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+            Label:
+                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+                markup: True
+                font_size: 20
+                bold: True
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Button:
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    print("Settings clicked")
+                Image:
+                    source: "assets/settings-b.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+        # Header Section
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            padding: [20, 10, 20, 10]
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: "Add Transaction"
+                color: 0, 0, 0, 1
+                font_size: 20
+                bold: True
+                halign: "left"
+                valign: "middle"
+                text_size: self.width, None
+
+        # Content Area (ScrollView)
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 20
+                padding: [20, 10, 20, 20]
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Transaction Type Selector
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: 80
+                    spacing: 10
+
+                    Label:
+                        text: "Transaction Type"
+                        color: 0, 0, 0, 1
+                        font_size: 14
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: 50
+                        spacing: 15
+
+                        Button:
+                            id: income_btn
+                            text: "Income"
+                            background_color: 0, 0, 0, 0
+                            color: 1, 1, 1, 1
+                            font_size: 14
+                            bold: True
+                            background_normal: ""
+                            canvas.before:
+                                Color:
+                                    rgba: app.get_color_from_hex("#00D4AA")
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [8]
+                            on_release:
+                                root.set_transaction_type('income')
+
+                        Button:
+                            id: expense_btn
+                            text: "Expense"
+                            background_color: 0, 0, 0, 0
+                            color: 1, 1, 1, 1
+                            font_size: 14
+                            bold: True
+                            background_normal: ""
+                            canvas.before:
+                                Color:
+                                    rgba: app.get_color_from_hex("#AD590C")
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [8]
+                            on_release:
+                                root.set_transaction_type('expense')
+
+                # Amount Input
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: 70
+                    spacing: 8
+
+                    Label:
+                        text: "Amount"
+                        color: 0, 0, 0, 1
+                        font_size: 14
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: 42
+                        spacing: 10
+                        padding: [0, 0, 0, 0]
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#E0E0E0")
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [8]
+                            Line:
+                                rectangle: self.x, self.y, self.width, self.height
+                                width: 1
+
+                        Label:
+                            text: "₱"
+                            color: 0, 0, 0, 1
+                            font_size: 16
+                            bold: True
+                            size_hint_x: None
+                            width: 20
+                            halign: "center"
+                            valign: "middle"
+                            text_size: self.width, None
+
+                        TextInput:
+                            id: amount_input
+                            text: ""
+                            hint_text: "0.00"
+                            multiline: False
+                            input_filter: "float"
+                            background_color: 0, 0, 0, 0
+                            foreground_color: 0, 0, 0, 1
+                            background_normal: ""
+                            background_active: ""
+                            font_size: 16
+                            padding_y: [self.height / 2 - self.line_height / 2]
+
+                # Category Selector
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: 100
+                    spacing: 8
+
+                    Label:
+                        text: "Category"
+                        color: 0, 0, 0, 1
+                        font_size: 14
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    ScrollView:
+                        do_scroll_x: True
+                        do_scroll_y: False
+                        BoxLayout:
+                            orientation: "horizontal"
+                            size_hint_x: None
+                            width: self.minimum_width
+                            spacing: 12
+                            padding: [5, 0, 5, 0]
+
+                            # Food Category
+                            CategoryButton:
+                                id: category_food
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('food')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                Image:
+                                    source: "assets/food.png"
+                                    size_hint: None, None
+                                    size: 40, 40
+                                    pos_hint: {"center_x": 0.5}
+                                    allow_stretch: True
+                                Label:
+                                    text: "Food"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Transport Category
+                            CategoryButton:
+                                id: category_transport
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('transport')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                Image:
+                                    source: "assets/transport.png"
+                                    size_hint: None, None
+                                    size: 40, 40
+                                    pos_hint: {"center_x": 0.5}
+                                    allow_stretch: True
+                                Label:
+                                    text: "Transport"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Shopping Category
+                            CategoryButton:
+                                id: category_shopping
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('shopping')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                Image:
+                                    source: "assets/shopping.png"
+                                    size_hint: None, None
+                                    size: 40, 40
+                                    pos_hint: {"center_x": 0.5}
+                                    allow_stretch: True
+                                Label:
+                                    text: "Shopping"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Bills Category
+                            CategoryButton:
+                                id: category_bills
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('bills')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                Image:
+                                    source: "assets/drop.png"
+                                    size_hint: None, None
+                                    size: 40, 40
+                                    pos_hint: {"center_x": 0.5}
+                                    allow_stretch: True
+                                Label:
+                                    text: "Bills"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Other Category
+                            CategoryButton:
+                                id: category_other
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('other')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                Image:
+                                    source: "assets/settings.png"
+                                    size_hint: None, None
+                                    size: 40, 40
+                                    pos_hint: {"center_x": 0.5}
+                                    allow_stretch: True
+                                Label:
+                                    text: "Other"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                # Description/Notes Input
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: 100
+                    spacing: 8
+
+                    Label:
+                        text: "Description"
+                        color: 0, 0, 0, 1
+                        font_size: 14
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: 72
+                        padding: [10, 5, 10, 5]
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#E0E0E0")
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [8]
+                            Line:
+                                rectangle: self.x, self.y, self.width, self.height
+                                width: 1
+
+                        TextInput:
+                            id: description_input
+                            text: ""
+                            hint_text: "Add a note (optional)"
+                            multiline: True
+                            background_color: 0, 0, 0, 0
+                            foreground_color: 0, 0, 0, 1
+                            background_normal: ""
+                            background_active: ""
+                            font_size: 14
+                            padding: [5, 5, 5, 5]
+
+                # Date Input
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: 70
+                    spacing: 8
+
+                    Label:
+                        text: "Date"
+                        color: 0, 0, 0, 1
+                        font_size: 14
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: 42
+                        spacing: 10
+                        padding: [10, 0, 10, 0]
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#E0E0E0")
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [8]
+                            Line:
+                                rectangle: self.x, self.y, self.width, self.height
+                                width: 1
+
+                        Image:
+                            source: "assets/calendar.png"
+                            size_hint_x: None
+                            width: 20
+                            size_hint_y: None
+                            height: 20
+                            pos_hint: {"center_y": 0.5}
+                            allow_stretch: True
+
+                        TextInput:
+                            id: date_input
+                            text: ""
+                            hint_text: "MM/DD/YYYY"
+                            multiline: False
+                            background_color: 0, 0, 0, 0
+                            foreground_color: 0, 0, 0, 1
+                            background_normal: ""
+                            background_active: ""
+                            font_size: 14
+                            padding_y: [self.height / 2 - self.line_height / 2]
+
+                # Submit Button
+                Button:
+                    text: "Add Transaction"
+                    background_color: 0, 0, 0, 0
+                    color: 1, 1, 1, 1
+                    font_size: 16
+                    bold: True
+                    background_normal: ""
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: app.get_color_from_hex("#07344E")
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [8]
+                    on_release:
+                        root.add_transaction()
+
         # Bottom Navigation Bar
         BottomNavBar:
-

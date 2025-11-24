@@ -1,17 +1,17 @@
 {
-    "louisaludez": {
-        "password": "meowe"
-    },
-    "jork": {
-        "password": "123"
-    },
-    "jobet": {
-        "password": "jobet"
-    },
-    "1": {
-        "password": "1"
-    },
-    "2": {
-        "password": "2"
+    "loui": {
+        "password": "8ac61c1e99d704021f6db2357521203f:a081cba22aa7a3328ef3b79dc185545369f65eea629fc85d24c3bc45225be312",
+        "transactions": [
+            {
+                "id": "20251124085621535543",
+                "type": "expense",
+                "amount": 11111.0,
+                "category": "transport",
+                "description": "fdfdfdfdfd",
+                "date": "11/24/2025",
+                "timestamp": "2025-11-24T08:56:21.535543"
+            }
+        ],
+        "monthly_budget": 20000
     }
 }

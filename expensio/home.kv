@@ -118,7 +118,8 @@
                             size: 16, 16
 
                 Label:
-                    text: "₱ 5,690.00"
+                    id: total_balance_label
+                    text: "₱ 0.00"
                     color: app.get_color_from_hex("#AD590C")
                     font_size: 18
                     bold: True
@@ -150,7 +151,8 @@
                             text_size: self.width, None
 
                         Label:
-                            text: "₱ 2,000.00"
+                            id: savings_label
+                            text: "₱ 0.00"
                             color: app.get_color_from_hex("#00D4AA")
                             font_size: 16
                             bold: True
@@ -176,7 +178,8 @@
                             text_size: self.width, None
 
                         Label:
-                            text: "₱ 1,014.00"
+                            id: expenses_label
+                            text: "₱ 0.00"
                             color: 1, 1, 1, 1
                             font_size: 16
                             bold: True
@@ -217,252 +220,13 @@
 
             # Scrollable Transaction Items
             ScrollView:
+                id: transactions_scroll
                 do_scroll_x: False
                 BoxLayout:
                     orientation: "vertical"
                     size_hint_y: None
                     height: self.minimum_height
                     spacing: 10
-
-                    # Food Transaction
-                    BoxLayout:
-                        orientation: "horizontal"
-                        size_hint_y: None
-                        height: 55
-                        spacing: 12
-
-                        FloatLayout:
-                            size_hint_x: None
-                            width: 40
-                            height: 40
-                            canvas.before:
-                                Color:
-                                    rgba: 0.6, 0.4, 0.2, 1
-                                Ellipse:
-                                    pos: self.pos
-                                    size: self.size
-                            Image:
-                                source: "assets/food.png"
-                                size_hint: None, None
-                                size: 24, 24
-                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                allow_stretch: True
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: 1
-                            spacing: 3
-                            halign: "left"
-
-                            Label:
-                                text: "[b]Food[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "Lunch at a restaurant"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 11
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: None
-                            width: 90
-                            spacing: 3
-
-                            Label:
-                                text: "[b]₱395[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "Oct. 17, 2025"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 10
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                    # Transport Transaction
-                    BoxLayout:
-                        orientation: "horizontal"
-                        size_hint_y: None
-                        height: 55
-                        spacing: 12
-
-                        FloatLayout:
-                            size_hint_x: None
-                            width: 40
-                            height: 40
-                            canvas.before:
-                                Color:
-                                    rgba: 0, 0, 0, 1
-                                Ellipse:
-                                    pos: self.pos
-                                    size: self.size
-                            Image:
-                                source: "assets/transport.png"
-                                size_hint: None, None
-                                size: 24, 24
-                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                allow_stretch: True
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: 1
-                            spacing: 3
-                            halign: "left"
-
-                            Label:
-                                text: "[b]Transport[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "Bus ticket"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 11
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: None
-                            width: 90
-                            spacing: 3
-
-                            Label:
-                                text: "[b]₱120[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "Oct. 19, 2025"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 10
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                    # Shopping Transaction
-                    BoxLayout:
-                        orientation: "horizontal"
-                        size_hint_y: None
-                        height: 55
-                        spacing: 12
-
-                        FloatLayout:
-                            size_hint_x: None
-                            width: 40
-                            height: 40
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#07344E")
-                                Ellipse:
-                                    pos: self.pos
-                                    size: self.size
-                            Image:
-                                source: "assets/shopping.png"
-                                size_hint: None, None
-                                size: 24, 24
-                                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                allow_stretch: True
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: 1
-                            spacing: 3
-                            halign: "left"
-
-                            Label:
-                                text: "[b]Shopping[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "New shirt"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 11
-                                halign: "left"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint_x: None
-                            width: 90
-                            spacing: 3
-
-                            Label:
-                                text: "[b]₱499[/b]"
-                                markup: True
-                                color: 0, 0, 0, 1
-                                font_size: 14
-                                bold: True
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
-
-                            Label:
-                                text: "Oct. 25, 2025"
-                                color: 0.5, 0.5, 0.5, 1
-                                font_size: 10
-                                halign: "right"
-                                valign: "middle"
-                                size_hint_y: None
-                                height: self.texture_size[1]
-                                text_size: self.width, None
 
             # Action Buttons
             BoxLayout:
@@ -487,7 +251,8 @@
                             size: self.size
                             radius: [8]
                     on_release:
-                        print("Monthly Budget clicked")
+                        app.root.current = 'chart'
+
 
                 Button:
                     text: "Add Transaction"
