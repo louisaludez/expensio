@@ -1,10 +1,17 @@
 from kivy.uix.screenmanager import Screen
 from kivy.app import App
+from kivy.uix.popup import Popup
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.utils import get_color_from_hex
+from kivy.clock import Clock
 from datetime import datetime, timedelta
 import json
 import os
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Ellipse, Line, PushMatrix, PopMatrix, Translate
+from kivy.graphics import Color, Ellipse, Line, PushMatrix, PopMatrix, Translate, RoundedRectangle
 from kivy.graphics.instructions import InstructionGroup
 import math
 
@@ -101,7 +108,7 @@ class CircularBudgetWidget(Widget):
         
         self._instruction_group.add(PushMatrix())
         self._instruction_group.add(Translate(center_x, center_y))
-        self._instruction_group.add(Color(0.027, 0.204, 0.306, 1))  # Dark teal #07344E
+        self._instruction_group.add(Color(0.027, 0.204, 0.306, 1))  
         for i in range(num_dots):
             angle_rad = math.radians(start_angle + (progress_degrees * i / num_dots) if num_dots > 0 else start_angle)
             x = (radius + 10) * math.cos(angle_rad)
@@ -194,7 +201,7 @@ class ChartScreen(Screen):
         last_transactions = self.get_last_month_transactions(all_transactions)
         
         # Calculate current month budget and expenses
-        monthly_budget = user_data.get('monthly_budget', 20000)  # Default budget
+        monthly_budget = user_data.get('monthly_budget', 0)  # Default budget
         current_expenses = sum(t.get('amount', 0) for t in current_transactions if t.get('type') == 'expense')
         current_income = sum(t.get('amount', 0) for t in current_transactions if t.get('type') == 'income')
         
@@ -202,8 +209,18 @@ class ChartScreen(Screen):
         progress = min(1.0, current_expenses / monthly_budget) if monthly_budget > 0 else 0.0
         
         # Calculate last month budget
+        # Get the budget that was saved for last month
+       
         last_month_expenses = sum(t.get('amount', 0) for t in last_transactions if t.get('type') == 'expense')
-        last_month_budget = user_data.get('last_month_budget', last_month_expenses)
+        
+        # Check if we have a saved last month budget (only exists after month change)
+        last_month_budget = user_data.get('last_month_budget', None)
+        
+      
+      
+        if last_month_budget is None:
+           
+            last_month_budget = 0
         
         # Calculate category totals for current month
         category_totals = {}
@@ -240,12 +257,171 @@ class ChartScreen(Screen):
             
             # Update category cards
             category_mapping = {
-                'food': 'food_count_label',
                 'transport': 'transport_count_label',
-                'shopping': 'shopping_count_label'
+                'shopping': 'shopping_count_label',
+                'travel': 'travel_count_label',
+                'skincare': 'skincare_count_label',
+                'food': 'food_count_label',
+                'insurance': 'insurance_count_label',
+                'water': 'water_count_label',
+                'electricity': 'electricity_count_label'
             }
             
             for category, label_id in category_mapping.items():
                 if label_id in self.ids:
                     count = category_totals.get(category, 0)
                     self.ids[label_id].text = f"{count:,.0f}" if count > 0 else "0"
+    
+    def edit_monthly_budget(self):
+        """Open popup to edit monthly budget"""
+        app = App.get_running_app()
+        if not app or not app.current_user:
+            return
+        
+        users = load_users()
+        if app.current_user not in users:
+            return
+        
+        user_data = users[app.current_user]
+        current_budget = user_data.get('monthly_budget', 0)
+        
+        # Create popup content
+        content = BoxLayout(orientation="vertical", padding=20, spacing=15)
+        
+        # Title
+        title_label = Label(
+            text="Edit Monthly Budget",
+            font_size=18,
+            bold=True,
+            size_hint_y=None,
+            height=30,
+            color=(1, 1, 1, 1) 
+        )
+        content.add_widget(title_label)
+        
+        # Budget input container
+        input_container = BoxLayout(orientation="vertical", size_hint_y=None, height=50)
+        
+        # Create input layout with background
+        input_layout = BoxLayout(orientation="horizontal", size_hint_y=None, height=50, spacing=10, padding=[10, 0])
+        
+        # Draw background for input
+        def draw_input_bg(instance, value=None):
+            instance.canvas.before.clear()
+            with instance.canvas.before:
+                Color(*get_color_from_hex("#E0E0E0"))
+                RoundedRectangle(pos=instance.pos, size=instance.size, radius=[8])
+        
+        input_layout.bind(pos=draw_input_bg, size=draw_input_bg)
+        from kivy.clock import Clock
+        Clock.schedule_once(lambda dt: draw_input_bg(input_layout), 0.1)
+        
+        budget_input = TextInput(
+            text=str(int(current_budget)),
+            font_size=16,
+            multiline=False,
+            input_filter="int",
+            background_color=(0, 0, 0, 0),
+            foreground_color=(0, 0, 0, 1),
+            padding=[10, 10],
+            size_hint_x=1,
+            background_normal="",
+            background_active=""
+        )
+        input_layout.add_widget(budget_input)
+        input_container.add_widget(input_layout)
+        content.add_widget(input_container)
+        
+        # Buttons
+        button_layout = BoxLayout(orientation="horizontal", size_hint_y=None, height=40, spacing=10)
+        
+        cancel_btn = Button(
+            text="Cancel",
+            background_color=(0, 0, 0, 0),  
+            color=(0, 0, 0, 1), 
+            size_hint_x=0.5,
+            background_normal=""
+        )
+        
+        # Draw rounded background for cancel button
+        def draw_cancel_bg(instance, value=None):
+            instance.canvas.before.clear()
+            with instance.canvas.before:
+                Color(1, 1, 1, 1) 
+                RoundedRectangle(pos=instance.pos, size=instance.size, radius=[8])
+        
+        cancel_btn.bind(pos=draw_cancel_bg, size=draw_cancel_bg)
+        Clock.schedule_once(lambda dt: draw_cancel_bg(cancel_btn), 0.1)
+        
+        save_btn = Button(
+            text="Save",
+            background_color=(0, 0, 0, 0),  
+            color=(1, 1, 1, 1), 
+            size_hint_x=0.5,
+            background_normal=""
+        )
+        
+        # Draw rounded background for save button
+        def draw_save_bg(instance, value=None):
+            instance.canvas.before.clear()
+            with instance.canvas.before:
+                Color(*get_color_from_hex("#AD590C"))
+                RoundedRectangle(pos=instance.pos, size=instance.size, radius=[8])
+        
+        save_btn.bind(pos=draw_save_bg, size=draw_save_bg)
+        Clock.schedule_once(lambda dt: draw_save_bg(save_btn), 0.1)
+        
+        def save_budget(instance):
+            try:
+                new_budget = float(budget_input.text)
+                if new_budget < 0:
+                    return
+                
+                # Update budget
+                users = load_users()
+                if app.current_user in users:
+                    users[app.current_user]['monthly_budget'] = new_budget
+                    # Save to file
+                    with open(USERS_FILE, 'w') as f:
+                        json.dump(users, f, indent=4)
+                    
+                    # Refresh chart data
+                    self.update_chart_data()
+                    # Refresh home screen if it exists
+                    home_screen = app.root.get_screen('home')
+                    if hasattr(home_screen, 'update_balance_card'):
+                        home_screen.update_balance_card()
+                
+                popup.dismiss()
+            except ValueError:
+                pass
+        
+        save_btn.bind(on_press=save_budget)
+        cancel_btn.bind(on_press=lambda x: popup.dismiss())
+        
+        button_layout.add_widget(cancel_btn)
+        button_layout.add_widget(save_btn)
+        content.add_widget(button_layout)
+        
+        # Create and show popup
+        popup = Popup(
+            title="",
+            content=content,
+            size_hint=(0.8, 0.4),
+            auto_dismiss=False,
+            background="",
+            background_color=(1, 1, 1, 0),
+            separator_color=(0, 0, 0, 0)
+        )
+        
+        # Draw rounded background
+        def draw_popup_bg(instance, value=None):
+            instance.canvas.before.clear()
+            with instance.canvas.before:
+                Color(*get_color_from_hex("#26536d"))
+                RoundedRectangle(pos=instance.pos, size=instance.size, radius=[20])
+        
+        popup.bind(pos=draw_popup_bg, size=draw_popup_bg)
+        Clock.schedule_once(lambda dt: draw_popup_bg(popup), 0.1)
+        
+        popup.open()

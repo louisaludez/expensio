@@ -34,6 +34,7 @@ Builder.load_file("signup.kv")
 Builder.load_file("home.kv")
 Builder.load_file("notif.kv")
 Builder.load_file("category.kv")
+Builder.load_file("category_detail.kv")
 Builder.load_file("chart.kv")
 Builder.load_file("add_transaction.kv")
 
@@ -190,7 +191,7 @@ class WelcomeScreen(Screen):
 
 from screens.home import HomeScreen
 from screens.notif import NotifScreen
-from screens.category import CategoryScreen
+from screens.category import CategoryScreen, CategoryDetailScreen
 # ChartScreen imported from screens.chart
 class CategoryButton(ButtonBehavior, BoxLayout):
     """Clickable category button widget"""
@@ -235,23 +236,23 @@ class AddTransactionScreen(Screen):
                 # Highlight income button
                 income_btn.canvas.before.clear()
                 with income_btn.canvas.before:
-                    Color(0, 0.831, 0.667, 1)  # #00D4AA
+                    Color(0, 0.831, 0.667, 1)  
                     RoundedRectangle(pos=income_btn.pos, size=income_btn.size, radius=[8])
                 # Dim expense button
                 expense_btn.canvas.before.clear()
                 with expense_btn.canvas.before:
-                    Color(0.678, 0.349, 0.047, 0.5)  # #AD590C with transparency
+                    Color(0.678, 0.349, 0.047, 0.5) 
                     RoundedRectangle(pos=expense_btn.pos, size=expense_btn.size, radius=[8])
             else:  # expense
                 # Highlight expense button
                 expense_btn.canvas.before.clear()
                 with expense_btn.canvas.before:
-                    Color(0.678, 0.349, 0.047, 1)  # #AD590C
+                    Color(0.678, 0.349, 0.047, 1)  
                     RoundedRectangle(pos=expense_btn.pos, size=expense_btn.size, radius=[8])
                 # Dim income button
                 income_btn.canvas.before.clear()
                 with income_btn.canvas.before:
-                    Color(0, 0.831, 0.667, 0.5)  # #00D4AA with transparency
+                    Color(0, 0.831, 0.667, 0.5)  
                     RoundedRectangle(pos=income_btn.pos, size=income_btn.size, radius=[8])
     
     def set_category(self, category_name):
@@ -264,7 +265,7 @@ class AddTransactionScreen(Screen):
         from kivy.graphics import Color, Line, RoundedRectangle
         
         # Reset all category buttons
-        category_ids = ['category_food', 'category_transport', 'category_shopping', 'category_bills', 'category_other']
+        category_ids = ['category_transport', 'category_shopping', 'category_travel', 'category_skincare', 'category_food', 'category_insurance', 'category_water', 'category_electricity']
         
         for cat_id in category_ids:
             btn = self.ids.get(cat_id)
@@ -279,11 +280,14 @@ class AddTransactionScreen(Screen):
         
         # Highlight selected category
         category_mapping = {
-            'food': 'category_food',
             'transport': 'category_transport',
             'shopping': 'category_shopping',
-            'bills': 'category_bills',
-            'other': 'category_other'
+            'travel': 'category_travel',
+            'skincare': 'category_skincare',
+            'food': 'category_food',
+            'insurance': 'category_insurance',
+            'water': 'category_water',
+            'electricity': 'category_electricity'
         }
         
         selected_id = category_mapping.get(category_name)
@@ -448,7 +452,7 @@ class SignUpScreen(Screen):
         users[username] = {
             'password': hashed_password,
             'transactions': [],
-            'monthly_budget': 20000  # Default monthly budget
+            'monthly_budget': 0  # Default monthly budget
         }
         save_users(users)
         
@@ -476,6 +480,7 @@ class ExpensioApp(App):
         sm.add_widget(WelcomeScreen(name='welcome'))
         sm.add_widget(ChartScreen(name='chart'))
         sm.add_widget(CategoryScreen(name='category'))
+        sm.add_widget(CategoryDetailScreen(name='category_detail'))
         sm.add_widget(NotifScreen(name='notif'))
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(AddTransactionScreen(name='add_transaction'))

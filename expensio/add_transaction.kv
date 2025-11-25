@@ -87,66 +87,7 @@
                 size_hint_y: None
                 height: self.minimum_height
 
-                # Transaction Type Selector
-                BoxLayout:
-                    orientation: "vertical"
-                    size_hint_y: None
-                    height: 80
-                    spacing: 10
-
-                    Label:
-                        text: "Transaction Type"
-                        color: 0, 0, 0, 1
-                        font_size: 14
-                        bold: True
-                        halign: "left"
-                        valign: "middle"
-                        size_hint_y: None
-                        height: 20
-                        text_size: self.width, None
-
-                    BoxLayout:
-                        orientation: "horizontal"
-                        size_hint_y: None
-                        height: 50
-                        spacing: 15
-
-                        Button:
-                            id: income_btn
-                            text: "Income"
-                            background_color: 0, 0, 0, 0
-                            color: 1, 1, 1, 1
-                            font_size: 14
-                            bold: True
-                            background_normal: ""
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#00D4AA")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            on_release:
-                                root.set_transaction_type('income')
-
-                        Button:
-                            id: expense_btn
-                            text: "Expense"
-                            background_color: 0, 0, 0, 0
-                            color: 1, 1, 1, 1
-                            font_size: 14
-                            bold: True
-                            background_normal: ""
-                            canvas.before:
-                                Color:
-                                    rgba: app.get_color_from_hex("#AD590C")
-                                RoundedRectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                    radius: [8]
-                            on_release:
-                                root.set_transaction_type('expense')
-
+              
                 # Amount Input
                 BoxLayout:
                     orientation: "vertical"
@@ -234,42 +175,6 @@
                             spacing: 12
                             padding: [5, 0, 5, 0]
 
-                            # Food Category
-                            CategoryButton:
-                                id: category_food
-                                orientation: "vertical"
-                                size_hint: None, None
-                                size: 70, 70
-                                spacing: 5
-                                padding: [5, 5, 5, 5]
-                                on_press:
-                                    root.set_category('food')
-                                canvas.before:
-                                    Color:
-                                        rgba: 0, 0, 0, 0.1
-                                    Line:
-                                        rectangle: (self.x, self.y, self.width, self.height)
-                                        width: 1
-                                    Color:
-                                        rgba: app.get_color_from_hex("#FFFFFF")
-                                    RoundedRectangle:
-                                        pos: self.pos
-                                        size: self.size
-                                        radius: [10]
-                                Image:
-                                    source: "assets/food.png"
-                                    size_hint: None, None
-                                    size: 40, 40
-                                    pos_hint: {"center_x": 0.5}
-                                    allow_stretch: True
-                                Label:
-                                    text: "Food"
-                                    font_size: 10
-                                    color: 0, 0, 0, 1
-                                    bold: True
-                                    size_hint_y: None
-                                    height: 15
-
                             # Transport Category
                             CategoryButton:
                                 id: category_transport
@@ -292,12 +197,23 @@
                                         pos: self.pos
                                         size: self.size
                                         radius: [10]
-                                Image:
-                                    source: "assets/transport.png"
+                                AnchorLayout:
                                     size_hint: None, None
-                                    size: 40, 40
+                                    size: 44, 44
                                     pos_hint: {"center_x": 0.5}
-                                    allow_stretch: True
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#C3D9FF")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/public-transport.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
                                 Label:
                                     text: "Transport"
                                     font_size: 10
@@ -328,12 +244,23 @@
                                         pos: self.pos
                                         size: self.size
                                         radius: [10]
-                                Image:
-                                    source: "assets/shopping.png"
+                                AnchorLayout:
                                     size_hint: None, None
-                                    size: 40, 40
+                                    size: 44, 44
                                     pos_hint: {"center_x": 0.5}
-                                    allow_stretch: True
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#D9C4FF")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/shopping-2.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
                                 Label:
                                     text: "Shopping"
                                     font_size: 10
@@ -342,16 +269,16 @@
                                     size_hint_y: None
                                     height: 15
 
-                            # Bills Category
+                            # Travel Category
                             CategoryButton:
-                                id: category_bills
+                                id: category_travel
                                 orientation: "vertical"
                                 size_hint: None, None
                                 size: 70, 70
                                 spacing: 5
                                 padding: [5, 5, 5, 5]
                                 on_press:
-                                    root.set_category('bills')
+                                    root.set_category('travel')
                                 canvas.before:
                                     Color:
                                         rgba: 0, 0, 0, 0.1
@@ -364,30 +291,41 @@
                                         pos: self.pos
                                         size: self.size
                                         radius: [10]
-                                Image:
-                                    source: "assets/drop.png"
+                                AnchorLayout:
                                     size_hint: None, None
-                                    size: 40, 40
+                                    size: 44, 44
                                     pos_hint: {"center_x": 0.5}
-                                    allow_stretch: True
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#C3D9FF")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/travel.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
                                 Label:
-                                    text: "Bills"
+                                    text: "Travel"
                                     font_size: 10
                                     color: 0, 0, 0, 1
                                     bold: True
                                     size_hint_y: None
                                     height: 15
 
-                            # Other Category
+                            # Skincare Category
                             CategoryButton:
-                                id: category_other
+                                id: category_skincare
                                 orientation: "vertical"
                                 size_hint: None, None
                                 size: 70, 70
                                 spacing: 5
                                 padding: [5, 5, 5, 5]
                                 on_press:
-                                    root.set_category('other')
+                                    root.set_category('skincare')
                                 canvas.before:
                                     Color:
                                         rgba: 0, 0, 0, 0.1
@@ -400,19 +338,222 @@
                                         pos: self.pos
                                         size: self.size
                                         radius: [10]
-                                Image:
-                                    source: "assets/settings.png"
+                                AnchorLayout:
                                     size_hint: None, None
-                                    size: 40, 40
+                                    size: 44, 44
                                     pos_hint: {"center_x": 0.5}
-                                    allow_stretch: True
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#FFD9A6")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/skincare.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
                                 Label:
-                                    text: "Other"
+                                    text: "Skincare"
                                     font_size: 10
                                     color: 0, 0, 0, 1
                                     bold: True
                                     size_hint_y: None
                                     height: 15
+
+                            # Food Category
+                            CategoryButton:
+                                id: category_food
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('food')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                AnchorLayout:
+                                    size_hint: None, None
+                                    size: 44, 44
+                                    pos_hint: {"center_x": 0.5}
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#FFD9A6")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/food-2.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
+                                Label:
+                                    text: "Food"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Insurance Category
+                            CategoryButton:
+                                id: category_insurance
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('insurance')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                AnchorLayout:
+                                    size_hint: None, None
+                                    size: 44, 44
+                                    pos_hint: {"center_x": 0.5}
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#BEEEDB")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/insurance.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
+                                Label:
+                                    text: "Insurance"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Water Category
+                            CategoryButton:
+                                id: category_water
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('water')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                AnchorLayout:
+                                    size_hint: None, None
+                                    size: 44, 44
+                                    pos_hint: {"center_x": 0.5}
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#BEEEDB")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/drop.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
+                                Label:
+                                    text: "Water"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            # Electricity Category
+                            CategoryButton:
+                                id: category_electricity
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: 70, 70
+                                spacing: 5
+                                padding: [5, 5, 5, 5]
+                                on_press:
+                                    root.set_category('electricity')
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.1
+                                    Line:
+                                        rectangle: (self.x, self.y, self.width, self.height)
+                                        width: 1
+                                    Color:
+                                        rgba: app.get_color_from_hex("#FFFFFF")
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [10]
+                                AnchorLayout:
+                                    size_hint: None, None
+                                    size: 44, 44
+                                    pos_hint: {"center_x": 0.5}
+                                    canvas.before:
+                                        Color:
+                                            rgba: app.get_color_from_hex("#BEEEDB")
+                                        RoundedRectangle:
+                                            pos: self.pos
+                                            size: self.size
+                                            radius: [12]
+                                    Image:
+                                        source: "assets/electrical.png"
+                                        size_hint: None, None
+                                        size: 26, 26
+                                        allow_stretch: False
+                                        keep_ratio: True
+                                Label:
+                                    text: "Electricity"
+                                    font_size: 10
+                                    color: 0, 0, 0, 1
+                                    bold: True
+                                    size_hint_y: None
+                                    height: 15
+
+                            Widget:
+                                size_hint_x: None
+                                width: 5
 
                 # Description/Notes Input
                 BoxLayout:

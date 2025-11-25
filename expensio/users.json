@@ -1,17 +1,42 @@
 {
     "loui": {
-        "password": "8ac61c1e99d704021f6db2357521203f:a081cba22aa7a3328ef3b79dc185545369f65eea629fc85d24c3bc45225be312",
+        "password": "c13d7943e0f835a02b7806670878a50f:6961147307d72e98c7a2578691293ca22df5536de78e93b5b14214fdfc576d2d",
         "transactions": [
             {
-                "id": "20251124085621535543",
+                "id": "20251125164140348015",
                 "type": "expense",
-                "amount": 11111.0,
+                "amount": 1111.0,
+                "category": "shopping",
+                "description": "111",
+                "date": "11/25/2025",
+                "timestamp": "2025-11-25T16:41:40.348015"
+            },
+            {
+                "id": "20251125164221741116",
+                "type": "expense",
+                "amount": 12121212.0,
                 "category": "transport",
-                "description": "fdfdfdfdfd",
-                "date": "11/24/2025",
-                "timestamp": "2025-11-24T08:56:21.535543"
+                "description": "Transport transaction",
+                "date": "11/25/2025",
+                "timestamp": "2025-11-25T16:42:21.741116"
             }
         ],
-        "monthly_budget": 20000
+        "monthly_budget": 10000.0,
+        "savings": 0,
+        "last_processed_month": "2025-11",
+        "notifications": {
+            "daily_tip": {
+                "cleared": true
+            },
+            "transaction_20251125164140348015": {
+                "cleared": true
+            },
+            "budget_exceeded": {
+                "cleared": false
+            },
+            "transaction_20251125164221741116": {
+                "cleared": false
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@
                     orientation: 'horizontal'
                     size_hint_y: None
                     height: 20
-                    padding: [30, 0, 0, 0]  # Indent to align with text after radio button
+                    padding: [30, 0, 0, 0]  
                     
                     Label:
                         id: last_month_budget_label
@@ -61,7 +61,7 @@
                     height: 1
                     canvas.before:
                         Color:
-                            rgba: 0.7, 0.7, 0.7, 1  # Gray color
+                            rgba: 0.7, 0.7, 0.7, 1 
                         Rectangle:
                             pos: self.pos
                             size: self.size
@@ -73,9 +73,9 @@
                     height: 25
                     spacing: 10
                     
-                    
                     Label:
                         text: 'Current Month'
+                        size_hint_x: 1
                         size_hint_y: None
                         height: 20
                         font_size: 14
@@ -84,13 +84,26 @@
                         valign: 'middle'
                         text_size: self.size
                         color: app.get_color_from_hex("#000000")
+                    
+                    Button:
+                        id: edit_budget_btn
+                        text: 'Edit'
+                        size_hint: None, None
+                        size: 50, 25
+                        background_color: 0, 0, 0, 0
+                        background_normal: ""
+                        color: app.get_color_from_hex("#000000")
+                        font_size: 14
+                        bold: True
+                        on_release:
+                            root.edit_monthly_budget()
                 
                 # Motivational message
                 BoxLayout:
                     orientation: 'horizontal'
                     size_hint_y: None
                     height: 40
-                    padding: [30, 5, 0, 0]  # Indent to align with text after radio button
+                    padding: [30, 5, 0, 0]  
                     
                     Label:
                         id: motivational_label
@@ -109,7 +122,7 @@
                     orientation: 'horizontal'
                     size_hint_y: None
                     height: 20
-                    padding: [30, 0, 0, 0]  # Indent to align with text after radio button
+                    padding: [30, 0, 0, 0]  
                     
                     Label:
                         text: 'View Budget Overview for detailed summary.'
@@ -149,6 +162,7 @@
                             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                             spacing: 4
                             
+                            # Budget amount label
                             Label:
                                 id: budget_amount_label
                                 text: "₱ 0"
@@ -159,7 +173,7 @@
                                 size_hint_y: None
                                 height: 28
                                 text_size: self.size
-                                color: app.get_color_from_hex("#07344E")  # Dark teal
+                                color: app.get_color_from_hex("#07344E")  
                             
                             Label:
                                 text: "Monthly Budget"
@@ -169,146 +183,370 @@
                                 size_hint_y: None
                                 height: 16
                                 text_size: self.size
-                                color: app.get_color_from_hex("#666666")  # Gray
+                                color: app.get_color_from_hex("#666666")  
                     
                     Widget:
                         # Spacer to center content
                         size_hint_x: 1
                 #Category Summary
                 
-                
-                BoxLayout:
-                    orientation: 'horizontal'
+                ScrollView:
+                    do_scroll_x: True
+                    do_scroll_y: False
                     size_hint_y: None
                     height: 80
-                    padding: [0, 5, 0, 5]
-                    spacing: 8
-
-                    # Food Category Card
                     BoxLayout:
-                        orientation: 'vertical'
-                        size_hint_x: 1
-                        spacing: 4
-                        padding: [10, 10, 10, 10]
-                        canvas.before:
-                            Color:
-                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
-                            RoundedRectangle:
-                                pos: self.pos
-                                size: self.size
-                                radius: [12]
-                        canvas.after:
-                            # Shadow effect
-                            Color:
-                                rgba: 0, 0, 0, 0.2
-                            RoundedRectangle:
-                                pos: self.x - 1, self.y - 1
-                                size: self.size
-                                radius: [12]
-                        Label:
-                            id: food_count_label
-                            text: "0"
-                            font_size: 18
-                            bold: True
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: 1, 1, 1, 1  # White
-                            size_hint_y: None
-                            height: 22
-                        Label:
-                            text: "Food"
-                            font_size: 12
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: app.get_color_from_hex("#AD590C")  # Orange
-                            size_hint_y: None
-                            height: 16
+                        orientation: 'horizontal'
+                        size_hint_x: None
+                        width: self.minimum_width
+                        size_hint_y: None
+                        height: 80
+                        padding: [0, 5, 0, 5]
+                        spacing: 8
 
-                    # Transpo Category Card
-                    BoxLayout:
-                        orientation: 'vertical'
-                        size_hint_x: 1
-                        spacing: 4
-                        padding: [10, 10, 10, 10]
-                        canvas.before:
-                            Color:
-                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
-                            RoundedRectangle:
-                                pos: self.pos
-                                size: self.size
-                                radius: [12]
-                        canvas.after:
-                            # Shadow effect
-                            Color:
-                                rgba: 0, 0, 0, 0.2
-                            RoundedRectangle:
-                                pos: self.x - 1, self.y - 1
-                                size: self.size
-                                radius: [12]
-                        Label:
-                            id: transport_count_label
-                            text: "0"
-                            font_size: 18
-                            bold: True
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: 1, 1, 1, 1  # White
-                            size_hint_y: None
-                            height: 22
-                        Label:
-                            text: "Transpo"
-                            font_size: 12
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: app.get_color_from_hex("#AD590C")  # Orange
-                            size_hint_y: None
-                            height: 16
+                        # Transport Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1  
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: transport_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1 
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Transport"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C")  
+                                size_hint_y: None
+                                height: 16
 
-                    # Shopping Category Card
-                    BoxLayout:
-                        orientation: 'vertical'
-                        size_hint_x: 1
-                        spacing: 4
-                        padding: [10, 10, 10, 10]
-                        canvas.before:
-                            Color:
-                                rgba: 0.3, 0.3, 0.3, 1  # Dark gray background
-                            RoundedRectangle:
-                                pos: self.pos
-                                size: self.size
-                                radius: [12]
-                        canvas.after:
-                            # Shadow effect
-                            Color:
-                                rgba: 0, 0, 0, 0.2
-                            RoundedRectangle:
-                                pos: self.x - 1, self.y - 1
-                                size: self.size
-                                radius: [12]
-                        Label:
-                            id: shopping_count_label
-                            text: "0"
-                            font_size: 18
-                            bold: True
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: 1, 1, 1, 1  # White
-                            size_hint_y: None
-                            height: 22
-                        Label:
-                            text: "Shopping"
-                            font_size: 12
-                            halign: 'left'
-                            valign: 'top'
-                            text_size: self.size
-                            color: app.get_color_from_hex("#AD590C")  # Orange
-                            size_hint_y: None
-                            height: 16
+                        # Shopping Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1 
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: shopping_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1  
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Shopping"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C") 
+                                size_hint_y: None
+                                height: 16
+
+                        # Travel Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1  
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: travel_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1  
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Travel"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C")  
+                                size_hint_y: None
+                                height: 16
+
+                        # Skincare Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1 
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: skincare_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1  
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Skincare"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C")  
+                                size_hint_y: None
+                                height: 16
+
+                        # Food Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1 
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: food_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1  
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Food"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C") 
+                                size_hint_y: None
+                                height: 16
+
+                        # Insurance Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1 
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: insurance_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1  
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Insurance"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C")
+                                size_hint_y: None
+                                height: 16
+
+                        # Water Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1  
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: water_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1 
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Water"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C")  
+                                size_hint_y: None
+                                height: 16
+
+                        # Electricity Category Card
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint: None, None
+                            size: 100, 70
+                            spacing: 4
+                            padding: [10, 10, 10, 10]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.3, 0.3, 0.3, 1 
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [12]
+                            canvas.after:
+                                # Shadow effect
+                                Color:
+                                    rgba: 0, 0, 0, 0.2
+                                RoundedRectangle:
+                                    pos: self.x - 1, self.y - 1
+                                    size: self.size
+                                    radius: [12]
+                            Label:
+                                id: electricity_count_label
+                                text: "0"
+                                font_size: 18
+                                bold: True
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: 1, 1, 1, 1 
+                                size_hint_y: None
+                                height: 22
+                            Label:
+                                text: "Electricity"
+                                font_size: 12
+                                halign: 'left'
+                                valign: 'top'
+                                text_size: self.size
+                                color: app.get_color_from_hex("#AD590C") 
+                                size_hint_y: None
+                                height: 16
 
                 
   

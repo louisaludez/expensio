@@ -1,0 +1,118 @@
+<CategoryDetailScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+        padding: 0
+
+        # Top Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 60
+            padding: [15, 10, 15, 20]
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#FFFFFF")
+                Rectangle:
+                    pos: self.x, self.y
+                    size: self.width, self.height
+
+            Button:
+                size_hint_x: None
+                size_hint_y: None
+                width: 20
+                height: 20
+                background_color: 0, 0, 0, 0
+                on_release:
+                    app.root.current = 'category'
+                Image:
+                    source: "assets/left-arrow.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size_hint: None, None
+                    size: 20, 20
+
+            Label:
+                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
+                markup: True
+                font_size: 20
+                bold: True
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Widget:
+                size_hint_x: None
+                width: 20
+
+        # Header Section
+        BoxLayout:
+            size_hint_y: None
+            height: 80
+            padding: [20, 15, 20, 10]
+            spacing: 5
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Category Icon and Name
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: 50
+                spacing: 15
+
+                Image:
+                    id: category_icon
+                    source: ""
+                    size_hint_x: None
+                    width: 50
+                    size_hint_y: None
+                    height: 50
+                    allow_stretch: True
+
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_x: 1
+                    spacing: 5
+
+                    Label:
+                        id: category_name_label
+                        text: "Category"
+                        color: 0, 0, 0, 1
+                        font_size: 20
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 25
+                        text_size: self.width, None
+
+                    Label:
+                        id: category_total_label
+                        text: "Total: ₱ 0.00"
+                        color: 0.5, 0.5, 0.5, 1
+                        font_size: 14
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+        # Content Area
+        ScrollView:
+            id: transactions_scroll
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 10
+                padding: [20, 10, 20, 20]
+                size_hint_y: None
+                height: self.minimum_height
+
+        # Bottom Navigation Bar
+        BottomNavBar:
+

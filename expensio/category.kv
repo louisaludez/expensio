@@ -66,100 +66,104 @@
                     on_text: root.on_search_text(self, self.text)
         
         # Main Content Area (ScrollView)
-        BoxLayout:
-            orientation: 'vertical'
-            spacing: 10
-            padding: [10, 10, 10, 0]
-            size_hint: 1, 1
-            
-            Button:
-                text: 'Personal'
-                background_normal: ''
-                background_color: 0,0,0,0
-                background_down: ''
-                color: app.get_color_from_hex("#FFFFFF")    
-                font_size: 12
-                bold: True
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 15
+                padding: [15, 15, 15, 15]
                 size_hint_y: None
-                size_hint_x: None
-                height: 30
-                width: 90
-                on_release: root.filter_personal()
-                canvas.before:
-                    Color:
-                        rgba: app.get_color_from_hex("#07344E")
-                    RoundedRectangle:
-                        pos: self.pos
-                        size: self.size
-                        radius: [10]
-            ScrollView:
-                id: category_scroll
-                do_scroll_x: True
-                do_scroll_y: False
-
-                BoxLayout:
-                    orientation:'horizontal'
-                    size_hint_x: None
-                    size_hint_y: None
-                    width: self.minimum_width
-                    padding: [5, 30, 10, 0]
-                    spacing: 15
-#Bills Category Section
-            BoxLayout:   
-                size_hint_y: None
-                size_hint_x: 1
-                orientation: 'horizontal'
-                spacing: 10
-                height: 10   
+                height: self.minimum_height
+                
+                # Personal Section
                 Button:
-                    text: 'Bills'
+                    text: 'Personal'
                     background_normal: ''
                     background_color: 0,0,0,0
                     background_down: ''
-                    color: app.get_color_from_hex("#FFFFFF")    
-                    font_size: 12
+                    color: app.get_color_from_hex("#000000")    
+                    font_size: 14
                     bold: True
                     size_hint_y: None
                     size_hint_x: None
                     height: 30
                     width: 90
-                    on_release: root.filter_bills()
-                    canvas.before:
-                        Color:
-                            rgba: app.get_color_from_hex("#AD590C")
-                        RoundedRectangle:
-                            pos: self.pos
-                            size: self.size
-                            radius: [10]
-                Button:
+                    on_release: root.filter_personal()
                 
-                    size_hint_x: 1
+                # Personal Categories ScrollView
+                ScrollView:
+                    id: category_scroll
+                    do_scroll_x: True
+                    do_scroll_y: False
                     size_hint_y: None
-                    width: 60
-                    height: 30
-                    background_color: 0, 0, 0, 0
-            
-                    on_release:
-                        print("Menu clicked")
-                    Image:
-                        source: "assets/right-arrow.png"
-                        center_x: self.parent.center_x 
-                        center_y: self.parent.center_y
-                        size_hint: None, None
-                        size: 20, 20
+                    height: 140
 
-            ScrollView:
-                id: bills_scroll
-                do_scroll_x: True
-                do_scroll_y: False
+                    BoxLayout:
+                        orientation:'horizontal'
+                        size_hint_x: None
+                        size_hint_y: None
+                        width: self.minimum_width
+                        height: 140
+                        padding: [0, 0, 15, 0]
+                        spacing: 15
                 
-                BoxLayout:
-                    orientation:'horizontal'
-                    size_hint_x: None
+                # Bills Section
+                BoxLayout:   
                     size_hint_y: None
-                    padding: [10, 50, 10, 10]
-                    width: self.minimum_width
-                    spacing: 15
+                    size_hint_x: 1
+                    orientation: 'horizontal'
+                    spacing: 10
+                    height: 30
+                    
+                    Button:
+                        text: 'Bills'
+                        background_normal: ''
+                        background_color: 0,0,0,0
+                        background_down: ''
+                        color: app.get_color_from_hex("#000000")    
+                        font_size: 14
+                        bold: True
+                        size_hint_y: None
+                        size_hint_x: None
+                        height: 30
+                        width: 90
+                        on_release: root.filter_bills()
+                    
+                    Widget:
+                        size_hint_x: 1
+                    
+                    Button:
+                        size_hint_x: None
+                        size_hint_y: None
+                        width: 30
+                        height: 30
+                        background_color: 0, 0, 0, 0
+                        on_release:
+                            print("Scroll right clicked")
+                        Image:
+                            source: "assets/right-arrow.png"
+                            center_x: self.parent.center_x 
+                            center_y: self.parent.center_y
+                            size_hint: None, None
+                            size: 20, 20
+
+                # Bills Categories ScrollView
+                ScrollView:
+                    id: bills_scroll
+                    do_scroll_x: True
+                    do_scroll_y: False
+                    size_hint_y: None
+                    height: 140
+                    
+                    BoxLayout:
+                        orientation:'horizontal'
+                        size_hint_x: None
+                        size_hint_y: None
+                        width: self.minimum_width
+                        height: 140
+                        padding: [0, 0, 15, 0]
+                        spacing: 15
                     
         # Bottom Navigation Bar
         BottomNavBar:

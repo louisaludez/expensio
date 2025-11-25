@@ -1,276 +1,420 @@
 <HomeScreen>:
-    BoxLayout:
-        orientation: "vertical"
-        spacing: 0
-        padding: 0
-
-        # Top Bar
+    FloatLayout:
         BoxLayout:
-            size_hint_y: None
-            height: 60
-            padding: [15, 10, 15, 20]
-            canvas.before:
-                Color:
-                    rgba: 0, 0, 0, 1
-                Rectangle:
-                    pos: self.x, self.y - 100
-                    size: self.width, self.height + 250
-                Color:
-                    rgba: 1, 1, 1, 1
-                Ellipse:
-                    size: self.width,100
-                    pos: self.x, self.y - 150
-
-            Button:
-                
-                size_hint_x: None
-                size_hint_y: None
-                width: 25
-                height: 25
-                background_color: 0, 0, 0, 0
-                on_release:
-                    print("Menu clicked")
-                Image:
-                    source: "assets/menus.png"
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size_hint: None, None
-                    size: 25, 25  
-
-            Label:
-                text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
-                markup: True
-                font_size: 20
-                bold: True
-                halign: "center"
-                valign: "middle"
-                text_size: self.width, None
-
-            Button:
-               
-                size_hint_x: None
-                size_hint_y: None
-                width: 25
-                height: 25
-                background_color: 0, 0, 0, 0
-                on_release:
-                    print("Settings clicked")
-                Image:
-                    source: "assets/settings.png"
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size_hint: None, None
-                    size: 25, 25
-                
-               
-
-        # Content Area
-        BoxLayout:
+            id: main_layout
             orientation: "vertical"
-            spacing: 20
-            padding: [20, 0, 20, 20]
+            spacing: 0
+            padding: 0
 
-            # Total Balance Card
+            # Top Bar
             BoxLayout:
-                orientation: "vertical"
                 size_hint_y: None
-                size_hint_x: None
-                height: 160
-                width: 265
-                padding: [20, 10, 20, 20]
-                spacing: 10
+                height: 60
+                padding: [15, 10, 15, 20]
                 canvas.before:
                     Color:
-                        rgba: app.get_color_from_hex("#07344E")
-                    RoundedRectangle:
-                        pos: self.pos
-                        size: self.size
-                        radius: [20]
+                        rgba: 0, 0, 0, 1
+                    Rectangle:
+                        pos: self.x, self.y - 100
+                        size: self.width, self.height + 250
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Ellipse:
+                        size: self.width,100
+                        pos: self.x, self.y - 150
 
-                BoxLayout:
-                    orientation: "horizontal"
-                    size_hint_y: None
-                    height: 20
-                    spacing: 5  # small gap between label and icon
-
-                    Label:
-                        text: "TOTAL BALANCE"
-                        color: 1, 1, 1, 1
-                        font_size: 12
-                        bold: True
-                        halign: "left"
-                        valign: "middle"
-                        size_hint_x: None
-                    
-
-                    Button:
-                        background_color: 0, 0, 0, 0
-                        background_normal: ""
-                        size_hint: None, None
-                        size: 20, 20
-                        on_release:
-                            print("Edit balance clicked")
-                        Image:
-                            source: "assets/edit.png"
-                            center_x: self.parent.center_x
-                            center_y: self.parent.center_y
-                            size_hint: None, None
-                            size: 16, 16
+                Widget:
+                    size_hint_x: None
+                    width: 25
 
                 Label:
-                    id: total_balance_label
-                    text: "₱ 0.00"
-                    color: app.get_color_from_hex("#AD590C")
-                    font_size: 18
-                    bold: True
-                    halign: "left"
-                    valign: "middle"
-                    size_hint_y: None
-                    height: 50
-                    text_size: self.width, None
-
-                BoxLayout:
-                    orientation: "horizontal"
-                    size_hint_y: None
-                    height: 40
-                    spacing: 30
-
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_x: 0.5
-                        spacing: 5
-
-                        Label:
-                            text: "Savings"
-                            color: 1, 1, 1, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                        Label:
-                            id: savings_label
-                            text: "₱ 0.00"
-                            color: app.get_color_from_hex("#00D4AA")
-                            font_size: 16
-                            bold: True
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                    BoxLayout:
-                        orientation: "vertical"
-                        size_hint_x: 0.5
-                        spacing: 5
-
-                        Label:
-                            text: "Expenses"
-                            color: 1, 1, 1, 1
-                            font_size: 12
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-                        Label:
-                            id: expenses_label
-                            text: "₱ 0.00"
-                            color: 1, 1, 1, 1
-                            font_size: 16
-                            bold: True
-                            halign: "left"
-                            valign: "middle"
-                            size_hint_y: None
-                            height: self.texture_size[1]
-                            text_size: self.width, None
-
-            # Transactions Section Header
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_y: None
-                height: 30
-                padding: [0, 0, 0, 10]
-
-                Label:
-                    text: "[b]TRANSACTIONS[/b]"
+                    text: "[color=#07334E]Expens[/color][color=#AD590C]io[/color]"
                     markup: True
-                    color: 0, 0, 0, 1
-                    font_size: 16
+                    font_size: 20
                     bold: True
-                    halign: "left"
+                    halign: "center"
                     valign: "middle"
-                    size_hint_x: 1
                     text_size: self.width, None
 
                 Button:
-                    text: "See All"
-                    background_color: 0, 0, 0, 0
-                    color: 0.5, 0.5, 0.5, 1
-                    font_size: 14
                     size_hint_x: None
-                    width: self.texture_size[0] + 10
-                    background_normal: ""
+                    size_hint_y: None
+                    width: 25
+                    height: 25
+                    background_color: 0, 0, 0, 0
                     on_release:
-                        print("See All clicked")
+                        root.toggle_drawer()
+                    Image:
+                        source: "assets/settings.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size_hint: None, None
+                        size: 25, 25
 
-            # Scrollable Transaction Items
-            ScrollView:
-                id: transactions_scroll
-                do_scroll_x: False
+
+            # Content Area
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 20
+                padding: [20, 0, 20, 20]
+
+                # Total Balance Card
                 BoxLayout:
                     orientation: "vertical"
                     size_hint_y: None
-                    height: self.minimum_height
+                    size_hint_x: None
+                    height: 160
+                    width: 265
+                    padding: [20, 10, 20, 20]
                     spacing: 10
-
-            # Action Buttons
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_y: None
-                height: 50
-                spacing: 15
-                padding: [0, 10, 0, 0]
-
-                Button:
-                    text: "Monthly Budget"
-                    background_color: 0, 0, 0, 0
-                    color: 1, 1, 1, 1
-                    font_size: 14
-                    bold: True
-                    background_normal: ""
                     canvas.before:
                         Color:
                             rgba: app.get_color_from_hex("#07344E")
                         RoundedRectangle:
                             pos: self.pos
                             size: self.size
-                            radius: [8]
-                    on_release:
-                        app.root.current = 'chart'
+                            radius: [20]
+
+                    Label:
+                        text: "AVAILABLE BALANCE"
+                        color: 1, 1, 1, 1
+                        font_size: 12
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 20
+                        text_size: self.width, None
+
+                    Label:
+                        id: total_balance_label
+                        text: "₱ 0.00"
+                        color: app.get_color_from_hex("#AD590C")
+                        font_size: 18
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_y: None
+                        height: 50
+                        text_size: self.width, None
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: 40
+                        spacing: 30
+
+                        BoxLayout:
+                            orientation: "vertical"
+                            size_hint_x: 0.5
+                            spacing: 5
+
+                            Label:
+                                text: "Savings"
+                                color: 1, 1, 1, 1
+                                font_size: 12
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                text_size: self.width, None
+
+                            Label:
+                                id: savings_label
+                                text: "₱ 0.00"
+                                color: app.get_color_from_hex("#00D4AA")
+                                font_size: 16
+                                bold: True
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                text_size: self.width, None
+
+                        BoxLayout:
+                            orientation: "vertical"
+                            size_hint_x: 0.5
+                            spacing: 5
+
+                            Label:
+                                text: "Expenses"
+                                color: 1, 1, 1, 1
+                                font_size: 12
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                text_size: self.width, None
+
+                            Label:
+                                id: expenses_label
+                                text: "₱ 0.00"
+                                color: 1, 1, 1, 1
+                                font_size: 16
+                                bold: True
+                                halign: "left"
+                                valign: "middle"
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                text_size: self.width, None
+
+                # Transactions Section Header
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: 30
+                    padding: [0, 0, 0, 10]
+
+                    Label:
+                        text: "[b]TRANSACTIONS[/b]"
+                        markup: True
+                        color: 0, 0, 0, 1
+                        font_size: 16
+                        bold: True
+                        halign: "left"
+                        valign: "middle"
+                        size_hint_x: 1
+                        text_size: self.width, None
+
+                    Button:
+                        text: "See All"
+                        background_color: 0, 0, 0, 0
+                        color: 0.5, 0.5, 0.5, 1
+                        font_size: 14
+                        size_hint_x: None
+                        width: self.texture_size[0] + 10
+                        background_normal: ""
+                        on_release:
+                            print("See All clicked")
+
+                # Scrollable Transaction Items
+                ScrollView:
+                    id: transactions_scroll
+                    do_scroll_x: False
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 10
+
+                # Action Buttons
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: 50
+                    spacing: 15
+                    padding: [0, 10, 0, 0]
+
+                    Button:
+                        text: "Monthly Budget"
+                        background_color: 0, 0, 0, 0
+                        color: 1, 1, 1, 1
+                        font_size: 14
+                        bold: True
+                        background_normal: ""
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#07344E")
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [8]
+                        on_release:
+                            app.root.current = 'chart'
 
 
-                Button:
-                    text: "Add Transaction"
-                    background_color: 0, 0, 0, 0
+                    Button:
+                        text: "Add Transaction"
+                        background_color: 0, 0, 0, 0
+                        color: 1, 1, 1, 1
+                        font_size: 14
+                        bold: True
+                        background_normal: ""
+                        canvas.before:
+                            Color:
+                                rgba: app.get_color_from_hex("#AD590C")
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [8]
+                        on_release:
+                            app.root.current = 'add_transaction'
+
+            # Bottom Navigation Bar
+            BottomNavBar:
+
+        Button:
+            id: drawer_backdrop
+            size_hint: None, None
+            size: 0, 0
+            background_color: 0, 0, 0, 0.4
+            opacity: 0
+            disabled: True
+            on_release:
+                root.toggle_drawer()
+
+        BoxLayout:
+            id: settings_drawer
+            orientation: 'vertical'
+            size_hint: None, 1
+            width: 220
+            pos: root.width, 0
+            padding: [20, 30, 20, 30]
+            spacing: 15
+            canvas.before:
+                Color:
+                    rgba: app.get_color_from_hex("#26536d")
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 0, 0]
+
+            Label:
+                text: "[b]Menu[/b]"
+                markup: True
+                color: 1, 1, 1, 1
+                font_size: 18
+                size_hint_y: None
+                height: 30
+                halign: "center"
+                valign: "middle"
+                text_size: self.width, None
+
+            Button:
+                text: "Notifications"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.navigate_to('notif')
+
+            Button:
+                text: "Categories"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.navigate_to('category')
+
+            Button:
+                text: "Monthly Budget"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#07344E")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.open_budget_editor()
+
+            Button:
+                text: "Add Transaction"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#AD590C")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.navigate_to('add_transaction')
+
+            Button:
+                text: "Change Password"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                bold: True
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: app.get_color_from_hex("#AD590C")
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.open_change_password_popup()
+
+            Button:
+                text: "Close"
+                background_color: 0, 0, 0, 0
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                background_normal: ""
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [8]
+                on_release:
+                    root.toggle_drawer()
+
+            Widget:
+                size_hint_y: 1
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: 140
+                padding: [0, 10]
+                spacing: 8
+
+                AnchorLayout:
+                    anchor_x: "center"
+                    anchor_y: "center"
+                    size_hint_y: None
+                    height: 80
+
+                    Image:
+                        source: "assets/user.png"
+                        size_hint: None, None
+                        size: 60, 60
+
+                Label:
+                    id: drawer_username_label
+                    text: app.current_user if app.current_user else ""
                     color: 1, 1, 1, 1
                     font_size: 14
                     bold: True
-                    background_normal: ""
-                    canvas.before:
-                        Color:
-                            rgba: app.get_color_from_hex("#AD590C")
-                        RoundedRectangle:
-                            pos: self.pos
-                            size: self.size
-                            radius: [8]
-                    on_release:
-                        app.root.current = 'add_transaction'
-
-        # Bottom Navigation Bar
-        BottomNavBar:
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.width, None
 

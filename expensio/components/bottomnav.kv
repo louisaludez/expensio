@@ -4,7 +4,7 @@
     padding: [10, 5, 10, 5]
     spacing: 20
     canvas.before:
-        # White background
+        # background
         Color:
             rgba: 1, 1, 1, 1
         Rectangle:
@@ -98,7 +98,7 @@
             size: 24, 24
             allow_stretch: True
             on_press:
-                print("Profile button clicked")
+                root.show_logout_confirmation()
     
     Widget:
         size_hint_x: 1
